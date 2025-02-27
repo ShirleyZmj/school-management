@@ -21,9 +21,11 @@ model Teachers {
   subject String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  courses Course[]
 }
 
-model courses {
+model Courses {
   id Int @id @default(autoincrement())
   name String @unique
   level String
