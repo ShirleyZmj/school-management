@@ -14,24 +14,23 @@ datasource db {
 }
 
 model Teachers {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
   contactNumber String
-  subject String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  subject       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  courses Course[]
+  courses Courses[]
 }
 
 model Courses {
-  id Int @id @default(autoincrement())
-  name String @unique
-  level String
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  level     String
   teacherId Int
-  teacher Teachers @relation(fields: [teacherId], references: [id])
+  teacher   Teachers @relation(fields: [teacherId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
