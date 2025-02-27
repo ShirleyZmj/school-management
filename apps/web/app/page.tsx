@@ -1,6 +1,6 @@
 "use client";
 
-import { App, Button, message } from "antd";
+import { Button, message } from "antd";
 
 export default function Home() {
   const handleClick = () => {
@@ -8,14 +8,12 @@ export default function Home() {
   };
 
   return (
-    <App>
-      <div>
-        <main>
-          <Button type="primary" onClick={handleClick}>
-            Click me
-          </Button>
-        </main>
-      </div>
-    </App>
+    <div>
+      <main>
+        <Button type="primary" onClick={handleClick}>
+          Click me
+        </Button>
+      </main>
+    </div>
   );
 }
