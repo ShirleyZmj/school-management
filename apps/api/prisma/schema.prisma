@@ -13,24 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Teachers {
-  id            Int      @id @default(autoincrement())
-  name          String
-  email         String   @unique
-  contactNumber String
-  subject       String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  courses Courses[]
+/// Teacher information table
+model teachers {
+  id             Int       @id @default(autoincrement())
+  name           String    @db.VarChar(255) /// Teacher's name
+  email          String    @unique @db.VarChar(255) /// Teacher's email
+  contact_number String    @db.VarChar(255) /// Contact phone number
+  subject        String    @db.VarChar(255) /// Teaching subject
+  created_at     DateTime  @default(now()) /// Creation timestamp
+  updated_at     DateTime  @updatedAt /// Last update timestamp
 }
 
-model Courses {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  level     String
-  teacherId Int
-  teacher   Teachers @relation(fields: [teacherId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+/// Class information table
+model classes {
+  id              Int      @id @default(autoincrement())
+  name            String   @db.VarChar(255) /// Class name
+  level           String   @db.VarChar(255) /// Grade level
+  created_at      DateTime @default(now()) /// Creation timestamp
+  updated_at      DateTime @updatedAt /// Last update timestamp
+  form_teacher_id Int /// Form teacher ID
+  form_teacher    teachers @relation(fields: [form_teacher_id], references: [id])
+
+  @@unique([level, name]) /// Ensures class names are unique within each grade level
 }
