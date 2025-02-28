@@ -34,7 +34,7 @@ export interface Class {
   id: string;
   level: Level;
   name: string;
-  teacherId: string;
+  formTeacherId: string;
   createdAt: Date;
   updatedAt: Date;
 }
