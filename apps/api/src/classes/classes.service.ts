@@ -18,8 +18,18 @@ export class ClassesService extends RestApiService {
 
   async findAll() {
     return this.handleOperation(() => this.prisma.classes.findMany({
-      include: {
-        form_teacher: true,
+      select: {
+        id: true,
+        name: true,
+        level: true,
+        form_teacher: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            contact_number: true,
+          },
+        },
       },
     }));
   }
@@ -27,8 +37,18 @@ export class ClassesService extends RestApiService {
   async findOne(id: number) {
     return this.handleOperation(() => this.prisma.classes.findUnique({
       where: { id },
-      include: {
-        form_teacher: true,
+      select: {
+        id: true,
+        name: true,
+        level: true,
+        form_teacher: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            contact_number: true,
+          },
+        },
       },
     }));
   }

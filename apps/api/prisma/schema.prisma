@@ -15,13 +15,14 @@ datasource db {
 
 /// Teacher information table
 model teachers {
-  id             Int       @id @default(autoincrement())
-  name           String    @db.VarChar(255) /// Teacher's name
-  email          String    @unique @db.VarChar(255) /// Teacher's email
-  contact_number String    @db.VarChar(255) /// Contact phone number
-  subject        String    @db.VarChar(255) /// Teaching subject
-  created_at     DateTime  @default(now()) /// Creation timestamp
-  updated_at     DateTime  @updatedAt /// Last update timestamp
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255) /// Teacher's name
+  email          String   @unique @db.VarChar(255) /// Teacher's email
+  contact_number String   @db.VarChar(255) /// Contact phone number
+  subject        String   @db.VarChar(255) /// Teaching subject
+  created_at     DateTime @default(now()) /// Creation timestamp
+  updated_at     DateTime @updatedAt /// Last update timestamp
+  classes        classes? /// Class information
 }
 
 /// Class information table
@@ -29,10 +30,9 @@ model classes {
   id              Int      @id @default(autoincrement())
   name            String   @db.VarChar(255) /// Class name
   level           String   @db.VarChar(255) /// Grade level
-  grade           String   @db.VarChar(255) /// Grade
   created_at      DateTime @default(now()) /// Creation timestamp
   updated_at      DateTime @updatedAt /// Last update timestamp
-  form_teacher_id Int /// Form teacher ID
+  form_teacher_id Int      @unique /// Form teacher ID
   form_teacher    teachers @relation(fields: [form_teacher_id], references: [id])
 
   @@unique([level, name]) /// Ensures class names are unique within each grade level

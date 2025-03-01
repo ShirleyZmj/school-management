@@ -27,6 +27,9 @@ CREATE TABLE "classes" (
 CREATE UNIQUE INDEX "teachers_email_key" ON "teachers"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "classes_form_teacher_id_key" ON "classes"("form_teacher_id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "classes_level_name_key" ON "classes"("level", "name");
 
 -- AddForeignKey

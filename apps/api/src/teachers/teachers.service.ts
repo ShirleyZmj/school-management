@@ -17,12 +17,27 @@ export class TeachersService extends RestApiService {
   }
 
   findAll() {
-    return this.handleOperation(() => this.prisma.teachers.findMany());
+    return this.handleOperation(() => this.prisma.teachers.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        subject: true,
+        contact_number: true,
+      }
+    }));
   }
 
   findOne(id: number) {
     return this.handleOperation(() => this.prisma.teachers.findUnique({
-      where: { id }
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        subject: true,
+        contact_number: true,
+      }
     }));
   }
 
