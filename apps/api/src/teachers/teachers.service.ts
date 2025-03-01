@@ -1,46 +1,29 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { Injectable } from '@nestjs/common';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { RestApiService } from 'src/common/services/restapi.service';
 
 @Injectable()
-export class TeachersService {
-  constructor(private prisma: PrismaService) { }
+export class TeachersService extends RestApiService {
+  constructor(private prisma: PrismaService) {
+    super()
+  }
 
   async create(createTeacherDto: CreateTeacherDto) {
-    try {
-      return await this.prisma.teachers.create({
-        data: createTeacherDto
-      });
-    } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError) {
-        if (error.code === 'P2002') {
-          const target = error.meta?.target as string[];
-          if (target?.includes('email')) {
-            throw new HttpException(
-              'Email already exists',
-              HttpStatus.CONFLICT
-            );
-          }
-        }
-        throw new HttpException(
-          'Database error occurred',
-          HttpStatus.BAD_REQUEST
-        );
-      }
-      throw error;
-    }
+    return this.handleOperation(() => this.prisma.teachers.create({
+      data: createTeacherDto
+    }));
   }
 
   findAll() {
-    return this.prisma.teachers.findMany();
+    return this.handleOperation(() => this.prisma.teachers.findMany());
   }
 
   findOne(id: number) {
-    return this.prisma.teachers.findUnique({
+    return this.handleOperation(() => this.prisma.teachers.findUnique({
       where: { id }
-    });
+    }));
   }
 
   update(id: number, updateTeacherDto: UpdateTeacherDto) {

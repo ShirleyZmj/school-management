@@ -1,9 +1,9 @@
-import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTeacherDto {
   @IsNotEmpty({ message: 'Name is required' })
   @IsString()
-  @Length(2, 50)
+  // @Length(2, 50)
   name: string;
 
   @IsNotEmpty({ message: 'Email is required' })
