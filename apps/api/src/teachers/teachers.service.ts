@@ -7,7 +7,7 @@ import { RestApiService } from 'src/common/services/restapi.service';
 @Injectable()
 export class TeachersService extends RestApiService {
   constructor(private prisma: PrismaService) {
-    super()
+    super();
   }
 
   async create(createTeacherDto: CreateTeacherDto) {

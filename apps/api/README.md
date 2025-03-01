@@ -97,3 +97,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## Generate a resource
+resource is a collection of controllers, services, and modules
+`nest generate resource resource-name`
