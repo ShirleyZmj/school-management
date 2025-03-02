@@ -42,6 +42,11 @@ class ClassesService {
     return apiService.getPaginated<Class>(this.baseUrl, params);
   }
 
+  // get all classes
+  public async getAllClasses(): Promise<ApiResponse<Class[]>> {
+    return apiService.get<Class[]>(this.baseUrl);
+  }
+
   // get a single class
   public async getClass(id: number): Promise<ApiResponse<Class>> {
     return apiService.get<Class>(`${this.baseUrl}/${id}`);
@@ -60,6 +65,28 @@ class ClassesService {
   // delete a class
   public async deleteClass(id: number): Promise<ApiResponse<void>> {
     return apiService.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  public async getAll(): Promise<Class[]> {
+    return apiService.get<Class[]>(this.baseUrl);
+  }
+
+  public async getById(id: number): Promise<Class> {
+    return apiService.get<Class>(`${this.baseUrl}/${id}`);
+  }
+
+  public async create(classData: Partial<Class>): Promise<Class> {
+    const response = await apiService.post("/classes", classData);
+    return response.data;
+  }
+
+  public async update(id: number, classData: Partial<Class>): Promise<Class> {
+    const response = await apiService.patch(`/classes/${id}`, classData);
+    return response.data;
+  }
+
+  public async delete(id: number): Promise<void> {
+    await apiService.delete(`/classes/${id}`);
   }
 }
 

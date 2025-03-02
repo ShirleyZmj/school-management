@@ -14,26 +14,7 @@ export class RestApiService {
   }
 
   protected successResponse<T>(data: T) {
-    return { statusCode: 200, message: "success", data: this.toCamelCase(data) };
-  }
-
-  // Convert snake_case to camelCase, for example: form_teacher -> formTeacher
-  // This is to ensure consistency in the response format
-  private toCamelCase(obj: unknown): unknown {
-    if (Array.isArray(obj)) {
-      return obj.map(v => this.toCamelCase(v));
-    } else if (this.isObject(obj)) {
-      return Object.keys(obj).reduce((result, key) => {
-        const camelKey = key.replace(/_([a-z])/g, g => g[1].toUpperCase());
-        result[camelKey] = this.toCamelCase(obj[key]);
-        return result;
-      }, {} as Record<string, unknown>);
-    }
-    return obj;
-  }
-
-  private isObject(obj: unknown): obj is Record<string, unknown> {
-    return obj !== null && typeof obj === 'object' && obj.constructor === Object;
+    return { statusCode: 200, message: "success", data };
   }
 
   private handlePrismaError(error: unknown): Error {

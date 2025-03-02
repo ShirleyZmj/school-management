@@ -43,6 +43,11 @@ class TeachersService {
     return apiService.getPaginated<Teacher>(this.baseUrl, params);
   }
 
+  // get all teachers
+  public async getAllTeachers(): Promise<ApiResponse<Teacher[]>> {
+    return apiService.get<Teacher[]>(this.baseUrl);
+  }
+
   // get a single teacher
   public async getTeacher(id: number): Promise<ApiResponse<Teacher>> {
     return apiService.get<Teacher>(`${this.baseUrl}/${id}`);

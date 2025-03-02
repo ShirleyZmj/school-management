@@ -12,7 +12,7 @@ export class CreateTeacherDto {
 
   @IsNotEmpty({ message: 'Contact number is required' })
   @IsString()
-  contact_number: string;
+  contactNumber: string;
 
   @IsNotEmpty({ message: 'Subject is required' })
   @IsString()

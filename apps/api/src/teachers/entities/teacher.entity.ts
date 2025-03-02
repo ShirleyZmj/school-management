@@ -2,8 +2,8 @@ export class Teacher {
   id: number;
   name: string;
   email: string;
-  contact_number: string;
+  contactNumber: string;
   subject: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }

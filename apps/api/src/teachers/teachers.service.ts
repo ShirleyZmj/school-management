@@ -23,7 +23,7 @@ export class TeachersService extends RestApiService {
         name: true,
         email: true,
         subject: true,
-        contact_number: true,
+        contactNumber: true,
       }
     }));
   }
@@ -36,7 +36,7 @@ export class TeachersService extends RestApiService {
         name: true,
         email: true,
         subject: true,
-        contact_number: true,
+        contactNumber: true
       }
     }));
   }

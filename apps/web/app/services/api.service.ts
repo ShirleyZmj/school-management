@@ -122,19 +122,22 @@ class ApiService {
   // common request method
   private async request<T>(config: IRequestConfig): Promise<ApiResponse<T>> {
     try {
-      const response: ApiResponse<T> = await this.api(config);
+      const response: AxiosResponse = await this.api(config);
+      console.log('common request response', response);
       return {
         success: true,
-        statusCode: response.statusCode,
-        data: response.data,
+        statusCode: response.status,
+        data: response.data.data,
+        message: response.data?.message || '',
       };
     } catch (error: any) {
       let errorResponse: ApiResponse<T> = {
+        success: false,
         message: error.message || 'Unknown error',
         errorCode: error.errorCode || 'UNKNOWN_ERROR',
         statusCode: error.statusCode || 500,
       };
-      if (config.silent === false) {
+      if (config.silent !== true) {
         console.error(errorResponse);
       }
       return errorResponse;

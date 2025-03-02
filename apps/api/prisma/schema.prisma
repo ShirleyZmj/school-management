@@ -15,25 +15,25 @@ datasource db {
 
 /// Teacher information table
 model teachers {
-  id             Int      @id @default(autoincrement())
-  name           String   @db.VarChar(255) /// Teacher's name
-  email          String   @unique @db.VarChar(255) /// Teacher's email
-  contact_number String   @db.VarChar(255) /// Contact phone number
-  subject        String   @db.VarChar(255) /// Teaching subject
-  created_at     DateTime @default(now()) /// Creation timestamp
-  updated_at     DateTime @updatedAt /// Last update timestamp
-  classes        classes? /// Class information
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(255) /// Teacher's name
+  email         String   @unique @db.VarChar(255) /// Teacher's email
+  contactNumber String   @map("contact_number") @db.VarChar(255) /// Contact phone number
+  subject       String   @db.VarChar(255) /// Teaching subject
+  createdAt     DateTime @default(now()) @map("created_at") /// Creation timestamp
+  updatedAt     DateTime @updatedAt @map("updated_at") /// Last update timestamp
+  classes       classes? /// Class information
 }
 
 /// Class information table
 model classes {
-  id              Int      @id @default(autoincrement())
-  name            String   @db.VarChar(255) /// Class name
-  level           String   @db.VarChar(255) /// Grade level
-  created_at      DateTime @default(now()) /// Creation timestamp
-  updated_at      DateTime @updatedAt /// Last update timestamp
-  form_teacher_id Int      @unique /// Form teacher ID
-  form_teacher    teachers @relation(fields: [form_teacher_id], references: [id])
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(255) /// Class name
+  level         String   @db.VarChar(255) /// Grade level
+  createdAt     DateTime @default(now()) @map("created_at") /// Creation timestamp
+  updatedAt     DateTime @updatedAt @map("updated_at") /// Last update timestamp
+  formTeacherId Int      @unique @map("form_teacher_id") /// Form teacher ID
+  formTeacher   teachers @relation(fields: [formTeacherId], references: [id])
 
   @@unique([level, name]) /// Ensures class names are unique within each grade level
 }

@@ -11,5 +11,5 @@ export class CreateClassDto {
 
   @IsNumber()
   @IsNotEmpty()
-  form_teacher_id: number;
+  formTeacherId: number;
 }

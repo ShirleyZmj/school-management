@@ -22,12 +22,12 @@ export class ClassesService extends RestApiService {
         id: true,
         name: true,
         level: true,
-        form_teacher: {
+        formTeacher: {
           select: {
             id: true,
             name: true,
             email: true,
-            contact_number: true,
+            contactNumber: true,
           },
         },
       },
@@ -41,12 +41,12 @@ export class ClassesService extends RestApiService {
         id: true,
         name: true,
         level: true,
-        form_teacher: {
+        formTeacher: {
           select: {
             id: true,
             name: true,
             email: true,
-            contact_number: true,
+            contactNumber: true,
           },
         },
       },
