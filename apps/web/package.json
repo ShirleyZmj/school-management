@@ -17,6 +17,7 @@
     "@repo/shared": "workspace:*",
     "@repo/ui": "workspace:*",
     "antd": "^5.24.2",
+    "axios": "^1.8.1",
     "next": "^15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -24,10 +25,10 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.0.9",
     "@types/node": "^22",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
-    "@tailwindcss/postcss": "^4.0.9",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
     "postcss": "^8.5.3",

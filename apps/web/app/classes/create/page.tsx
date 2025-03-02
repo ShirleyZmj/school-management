@@ -17,7 +17,7 @@ interface Teacher {
 interface ClassFormData {
   name: string;
   level: string;
-  form_teacher_id: number;
+  formTeacherId: number;
 }
 
 export default function CreateClassPage() {
@@ -89,7 +89,7 @@ export default function CreateClassPage() {
 
           <Form.Item
             label="Form Teacher"
-            name="form_teacher_id"
+            name="formTeacherId"
             rules={[{ required: true, message: "Please select form teacher!" }]}
           >
             <Select placeholder="Select form teacher" loading={loadingTeachers}>

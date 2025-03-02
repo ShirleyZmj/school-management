@@ -1,53 +1,81 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Table, Button, Card, Space, Typography, message } from "antd";
+import { Table, Button, Card, Space, Typography, App } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import teachersService, { Teacher } from "../services/teachers.service";
 
 const { Title } = Typography;
 
-interface Teacher {
-  id: number;
-  name: string;
-  email: string;
-  subject: string;
-  contact_number: string;
-}
-
 export default function TeachersPage() {
+  const { notification, message } = App.useApp();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  });
+
+  const fetchTeachers = async (page = 1, pageSize = 10) => {
+    setLoading(true);
+    try {
+      const response = await teachersService.getTeachers({
+        page,
+        pageSize,
+      });
+
+      if (response.success && response.data) {
+        setTeachers(response.data.items);
+        setPagination({
+          current: response.data.page,
+          pageSize: response.data.pageSize,
+          total: response.data.total,
+        });
+      } else {
+        notification.error({
+          message: "Failed to fetch teachers",
+          description: response.message || "Unknown error occurred",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: "Failed to fetch teachers",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // 模拟API调用
-    setTimeout(() => {
-      setTeachers([
-        {
-          id: 1,
-          name: "John Doe",
-          email: "john.doe@school.com",
-          subject: "Mathematics",
-          contact_number: "123-456-7890",
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          email: "jane.smith@school.com",
-          subject: "Science",
-          contact_number: "123-456-7891",
-        },
-        {
-          id: 3,
-          name: "Robert Johnson",
-          email: "robert.johnson@school.com",
-          subject: "History",
-          contact_number: "123-456-7892",
-        },
-      ]);
-      setLoading(false);
-    }, 1000);
+    fetchTeachers();
   }, []);
+
+  const handleTableChange = (pagination: any) => {
+    fetchTeachers(pagination.current, pagination.pageSize);
+  };
+
+  const handleDelete = async (id: number, name: string) => {
+    try {
+      const response = await teachersService.deleteTeacher(id);
+      if (response.success) {
+        message.success(`Teacher ${name} deleted successfully`);
+        fetchTeachers(pagination.current, pagination.pageSize);
+      } else {
+        notification.error({
+          message: "Failed to delete teacher",
+          description: response.message || "Unknown error occurred",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: "Failed to delete teacher",
+      });
+    }
+  };
 
   const columns = [
     {
@@ -67,24 +95,24 @@ export default function TeachersPage() {
     },
     {
       title: "Contact",
-      dataIndex: "contact_number",
-      key: "contact_number",
+      dataIndex: "contactNumber",
+      key: "contactNumber",
     },
     {
       title: "Actions",
       key: "actions",
-      render: (_, record: Teacher) => (
+      render: (_: any, record: Teacher) => (
         <Space size="middle">
-          <Button type="primary" icon={<EditOutlined />} size="small">
-            Edit
-          </Button>
+          <Link href={`/teachers/edit/${record.id}`}>
+            <Button type="primary" icon={<EditOutlined />} size="small">
+              Edit
+            </Button>
+          </Link>
           <Button
             danger
             icon={<DeleteOutlined />}
             size="small"
-            onClick={() =>
-              message.success(`Would delete teacher ${record.name}`)
-            }
+            onClick={() => handleDelete(record.id, record.name)}
           >
             Delete
           </Button>
@@ -110,7 +138,12 @@ export default function TeachersPage() {
           dataSource={teachers}
           rowKey="id"
           loading={loading}
-          pagination={{ pageSize: 10 }}
+          pagination={{
+            ...pagination,
+            showSizeChanger: true,
+            showTotal: (total) => `Total ${total} items`,
+          }}
+          onChange={handleTableChange}
         />
       </Card>
     </div>

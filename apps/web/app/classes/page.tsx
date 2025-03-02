@@ -11,7 +11,7 @@ interface Class {
   id: number;
   name: string;
   level: string;
-  form_teacher: {
+  formTeacher: {
     id: number;
     name: string;
   };
@@ -29,7 +29,7 @@ export default function ClassesPage() {
           id: 1,
           name: "Class 1A",
           level: "Primary 1",
-          form_teacher: {
+          formTeacher: {
             id: 1,
             name: "John Doe",
           },
@@ -38,7 +38,7 @@ export default function ClassesPage() {
           id: 2,
           name: "Class 2B",
           level: "Primary 2",
-          form_teacher: {
+          formTeacher: {
             id: 2,
             name: "Jane Smith",
           },
@@ -47,7 +47,7 @@ export default function ClassesPage() {
           id: 3,
           name: "Class 3C",
           level: "Primary 3",
-          form_teacher: {
+          formTeacher: {
             id: 3,
             name: "Robert Johnson",
           },
@@ -71,8 +71,8 @@ export default function ClassesPage() {
     },
     {
       title: "Form Teacher",
-      dataIndex: "form_teacher",
-      key: "form_teacher",
+      dataIndex: "formTeacher",
+      key: "formTeacher",
       render: (teacher: { id: number; name: string }) => teacher.name,
     },
     {

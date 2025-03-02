@@ -1,34 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import { Form, Input, Button, Card, Typography, message } from "antd";
+import { Form, Input, Button, Card, Typography, App } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import teachersService, {
+  CreateTeacherRequest,
+} from "../../services/teachers.service";
 
 const { Title } = Typography;
 
-interface TeacherFormData {
-  name: string;
-  email: string;
-  subject: string;
-  contact_number: string;
-}
-
 export default function CreateTeacherPage() {
+  const { notification } = App.useApp();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onFinish = async (values: TeacherFormData) => {
+  const onFinish = async (values: CreateTeacherRequest) => {
     setLoading(true);
+    try {
+      const response = await teachersService.createTeacher(values);
 
-    // 模拟API调用
-    setTimeout(() => {
-      console.log("Form values:", values);
-      message.success("Teacher created successfully!");
+      if (response.success) {
+        notification.success({
+          message: "Success",
+          description: "Teacher created successfully!",
+        });
+        router.push("/teachers");
+      } else {
+        notification.error({
+          message: "Failed to create teacher",
+          description: response.message || "Unknown error occurred",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: "Failed to create teacher",
+      });
+    } finally {
       setLoading(false);
-      router.push("/teachers");
-    }, 1000);
+    }
   };
 
   return (
@@ -78,7 +90,7 @@ export default function CreateTeacherPage() {
 
           <Form.Item
             label="Contact Number"
-            name="contact_number"
+            name="contactNumber"
             rules={[
               {
                 required: true,

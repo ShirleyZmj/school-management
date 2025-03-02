@@ -16,6 +16,15 @@ async function bootstrap() {
   // Global exception filter
   app.useGlobalFilters(new AllExceptionsFilter());
 
+  // Set global prefix for all routes
+  app.setGlobalPrefix('api/v1');
+
+  // Configure CORS
+  app.enableCors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    credentials: true,
+  });
+
   await app.listen(process.env.PORT ?? 3030);
 }
 
