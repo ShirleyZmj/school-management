@@ -12,7 +12,15 @@ import "antd/dist/reset.css";
 const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <StyleProvider hashPriority="high">
-      <ConfigProvider theme={{ cssVar: true, hashed: false }}>
+      <ConfigProvider
+        theme={{
+          cssVar: true,
+          hashed: false,
+          token: {
+            colorPrimary: "#135BB4",
+          },
+        }}
+      >
         <App>{children}</App>
       </ConfigProvider>
     </StyleProvider>
