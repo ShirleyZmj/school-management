@@ -33,7 +33,7 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
         <App>
           <Layout>
             <Navbar />
-            <Content className="px-16">{children}</Content>
+            <Content>{children}</Content>
           </Layout>
         </App>
       </ConfigProvider>

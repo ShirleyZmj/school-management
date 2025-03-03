@@ -5,6 +5,7 @@ import { Table, Button, Card, Typography, Tag, App } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import classesService, { Class } from "../services/classes.service";
 import Link from "next/link";
+import TablePageWrapper from "../components/TablePageWrapper";
 
 const { Title } = Typography;
 
@@ -63,26 +64,26 @@ function ClassesPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <Title level={2}>Classes</Title>
+    <TablePageWrapper
+      title="Classes"
+      data={classes}
+      noDataMessage="There are no existing classes yet."
+      createButton={
         <Link href="/classes/create">
           <Button type="primary" icon={<PlusOutlined />}>
             Add Class
           </Button>
         </Link>
-      </div>
-
-      <Card>
-        <Table
-          columns={columns}
-          dataSource={classes}
-          rowKey="id"
-          loading={loading}
-          pagination={{ pageSize: 10 }}
-        />
-      </Card>
-    </div>
+      }
+    >
+      <Table
+        columns={columns}
+        dataSource={classes}
+        rowKey="id"
+        loading={loading}
+        pagination={{ pageSize: 10 }}
+      />
+    </TablePageWrapper>
   );
 }
 

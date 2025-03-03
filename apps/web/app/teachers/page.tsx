@@ -5,6 +5,7 @@ import { Table, Button, Card, Space, Typography, App } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import teachersService, { Teacher } from "../services/teachers.service";
+import TablePageWrapper from "../components/TablePageWrapper";
 
 const { Title } = Typography;
 
@@ -71,31 +72,31 @@ export default function TeachersPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto py-8">
-      <div className="flex justify-between items-center mb-6">
-        <Title level={2}>Teachers</Title>
+    <TablePageWrapper
+      title="Teachers"
+      data={teachers}
+      noDataMessage="There are no existing teachers yet."
+      createButton={
         <Link href="/teachers/create">
           <Button type="primary" icon={<PlusOutlined />}>
             Add Teacher
           </Button>
         </Link>
-      </div>
-
-      <Card>
-        <Table
-          columns={columns}
-          dataSource={teachers}
-          rowKey="id"
-          loading={loading}
-          pagination={{
-            total: total,
-            pageSize: 10,
-            onChange: (page, pageSize) => {
-              fetchTeachers(page, pageSize);
-            },
-          }}
-        />
-      </Card>
-    </div>
+      }
+    >
+      <Table
+        columns={columns}
+        dataSource={teachers}
+        rowKey="id"
+        loading={loading}
+        pagination={{
+          total: total,
+          pageSize: 10,
+          onChange: (page, pageSize) => {
+            fetchTeachers(page, pageSize);
+          },
+        }}
+      />
+    </TablePageWrapper>
   );
 }

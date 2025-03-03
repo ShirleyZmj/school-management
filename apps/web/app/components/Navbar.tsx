@@ -40,7 +40,7 @@ export default function Navbar() {
 
   return (
     <Header className="w-full shadow-md p-0 h-16 leading-[4rem] bg-white">
-      <div className="flex h-full gap-12 max-w-7xl mx-auto px-16">
+      <div className="flex h-full gap-12 px-16">
         {/* Logo and Title */}
         <div className="flex items-center cursor-pointer">
           <div className="flex items-center" onClick={() => router.push("/")}>
