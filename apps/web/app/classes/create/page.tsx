@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import classesService from "../../services/classes.service";
 import teachersService from "../../services/teachers.service";
 import { Level } from "@repo/shared/src/types";
+import PageWrapper from "../../components/PageWrapper";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -57,7 +58,7 @@ export default function CreateClassPage() {
 
   useEffect(() => {
     fetchTeachers();
-  }, [fetchTeachers]);
+  }, []);
 
   const onFinish = async (values: ClassFormData) => {
     setLoading(true);
@@ -81,29 +82,11 @@ export default function CreateClassPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-6">
-        <Link
-          href="/classes"
-          className="flex items-center text-primary hover:underline mb-4"
-        >
-          <ArrowLeftOutlined className="mr-1" /> Back to Classes
-        </Link>
-        <Title level={2}>Add New Class</Title>
-      </div>
-
-      <Card>
-        <Form layout="vertical" onFinish={onFinish} autoComplete="off">
+    <PageWrapper title="Add New Class">
+      <Form layout="vertical" onFinish={onFinish} autoComplete="off">
+        <Card className="shadow-md">
           <Form.Item
-            label="Class Name"
-            name="name"
-            rules={[{ required: true, message: "Please input class name!" }]}
-          >
-            <Input placeholder="Enter class name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Level"
+            label="Class Level"
             name="level"
             rules={[{ required: true, message: "Please select level!" }]}
           >
@@ -114,6 +97,14 @@ export default function CreateClassPage() {
                 </Option>
               ))}
             </Select>
+          </Form.Item>
+
+          <Form.Item
+            label="Class Name"
+            name="name"
+            rules={[{ required: true, message: "Please input class name!" }]}
+          >
+            <Input placeholder="Enter class name" />
           </Form.Item>
 
           <Form.Item
@@ -129,14 +120,19 @@ export default function CreateClassPage() {
               ))}
             </Select>
           </Form.Item>
+        </Card>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
-              Create Class
+        <Form.Item className="flex justify-end mt-6">
+          <Link href="/classes">
+            <Button icon={<ArrowLeftOutlined />} className="mr-4">
+              Back
             </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+          </Link>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Add Class
+          </Button>
+        </Form.Item>
+      </Form>
+    </PageWrapper>
   );
 }

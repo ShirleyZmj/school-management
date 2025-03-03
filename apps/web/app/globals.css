@@ -4,3 +4,7 @@
 .primary-color {
   color: #135bb4;
 }
+
+a {
+  color: #135bb4 !important;
+}

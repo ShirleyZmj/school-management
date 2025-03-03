@@ -13,7 +13,7 @@ const MENU_ITEMS = [
   {
     key: "teachers",
     label: (
-      <Link href="/teachers" className="text-base font-medium !text-primary">
+      <Link href="/teachers" className="text-base font-medium">
         Teachers
       </Link>
     ),
@@ -21,7 +21,7 @@ const MENU_ITEMS = [
   {
     key: "classes",
     label: (
-      <Link href="/classes" className="text-base font-medium !text-primary">
+      <Link href="/classes" className="text-base font-medium">
         Classes
       </Link>
     ),

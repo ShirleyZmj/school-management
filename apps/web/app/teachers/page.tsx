@@ -43,19 +43,20 @@ export default function TeachersPage() {
 
   useEffect(() => {
     fetchTeachers();
-  }, [fetchTeachers]);
+  }, []);
 
   const columns = useMemo(
     () => [
       {
+        title: "#",
+        dataIndex: "index",
+        key: "index",
+        render: (_: any, __: any, index: number) => index + 1,
+      },
+      {
         title: "Name",
         dataIndex: "name",
         key: "name",
-      },
-      {
-        title: "Email",
-        dataIndex: "email",
-        key: "email",
       },
       {
         title: "Subject",
@@ -63,7 +64,12 @@ export default function TeachersPage() {
         key: "subject",
       },
       {
-        title: "Contact",
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
+      },
+      {
+        title: "Work Contact",
         dataIndex: "contactNumber",
         key: "contactNumber",
       },

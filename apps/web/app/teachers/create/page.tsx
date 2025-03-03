@@ -9,6 +9,7 @@ import teachersService, {
   CreateTeacherRequest,
 } from "../../services/teachers.service";
 import { Subject } from "@repo/shared/src/types";
+import PageWrapper from "../../components/PageWrapper";
 
 const { Title } = Typography;
 const SUBJECTS = Object.values(Subject);
@@ -22,7 +23,7 @@ export default function CreateTeacherPage() {
     setLoading(true);
     try {
       const response = await teachersService.createTeacher(values);
-
+      console.log(response);
       if (response.success) {
         notification.success({
           message: "Success",
@@ -46,19 +47,9 @@ export default function CreateTeacherPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-6">
-        <Link
-          href="/teachers"
-          className="flex items-center text-primary hover:underline mb-4"
-        >
-          <ArrowLeftOutlined className="mr-1" /> Back to Teachers
-        </Link>
-        <Title level={2}>Add New Teacher</Title>
-      </div>
-
-      <Card>
-        <Form layout="vertical" onFinish={onFinish} autoComplete="off">
+    <PageWrapper title="Add New Teacher">
+      <Form layout="vertical" onFinish={onFinish} autoComplete="off">
+        <Card className="shadow-md">
           <Form.Item
             label="Name"
             name="name"
@@ -66,18 +57,7 @@ export default function CreateTeacherPage() {
               { required: true, message: "Please input teacher's name!" },
             ]}
           >
-            <Input placeholder="Enter teacher's name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Please input teacher's email!" },
-              { type: "email", message: "Please enter a valid email!" },
-            ]}
-          >
-            <Input placeholder="Enter teacher's email" />
+            <Input placeholder="Name" />
           </Form.Item>
 
           <Form.Item
@@ -87,7 +67,7 @@ export default function CreateTeacherPage() {
               { required: true, message: "Please select teacher's subject!" },
             ]}
           >
-            <Select placeholder="Select teacher's subject">
+            <Select placeholder="Select a subject">
               {SUBJECTS.map((subject) => (
                 <Select.Option key={subject} value={subject}>
                   {subject}
@@ -97,25 +77,48 @@ export default function CreateTeacherPage() {
           </Form.Item>
 
           <Form.Item
-            label="Contact Number"
+            label="Email Address"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input teacher's email address.",
+              },
+              { type: "email", message: "This email address is invalid." },
+            ]}
+          >
+            <Input placeholder="Email Address" />
+          </Form.Item>
+
+          <Form.Item
+            label="Work Contact Number"
             name="contactNumber"
             rules={[
               {
                 required: true,
-                message: "Please input teacher's contact number!",
+                message: "Please input teacher's workcontact number.",
+              },
+              {
+                pattern: /^[689]\d{7}$/,
+                message: "This work contact number is invalid.",
               },
             ]}
           >
-            <Input placeholder="Enter teacher's contact number" />
+            <Input placeholder="Work Contact Number" />
           </Form.Item>
+        </Card>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
-              Create Teacher
+        <Form.Item className="flex justify-end mt-6">
+          <Link href="/teachers">
+            <Button icon={<ArrowLeftOutlined />} className="mr-4">
+              Back
             </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+          </Link>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Add Teacher
+          </Button>
+        </Form.Item>
+      </Form>
+    </PageWrapper>
   );
 }

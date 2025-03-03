@@ -38,20 +38,25 @@ function ClassesPage() {
 
   useEffect(() => {
     fetchClasses();
-  }, [fetchClasses]);
+  }, []);
 
   const columns = useMemo(
     () => [
       {
+        title: "#",
+        dataIndex: "index",
+        key: "index",
+        render: (_: any, __: any, index: number) => index + 1,
+      },
+      {
+        title: "Class Level",
+        dataIndex: "level",
+        key: "level",
+      },
+      {
         title: "Class Name",
         dataIndex: "name",
         key: "name",
-      },
-      {
-        title: "Level",
-        dataIndex: "level",
-        key: "level",
-        render: (level: string) => <Tag color="blue">{level}</Tag>,
       },
       {
         title: "Form Teacher",
