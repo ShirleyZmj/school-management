@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Form, Input, Button, Card, Typography, Select, App } from "antd";
+import { Form, Input, Button, Card, Select, App } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,6 @@ import teachersService from "../../services/teachers.service";
 import { Level } from "@repo/shared/src/types";
 import PageWrapper from "../../components/PageWrapper";
 
-const { Title } = Typography;
 const { Option } = Select;
 
 interface Teacher {
@@ -82,7 +81,7 @@ export default function CreateClassPage() {
   };
 
   return (
-    <PageWrapper title="Add New Class">
+    <PageWrapper title="Add Class">
       <Form layout="vertical" onFinish={onFinish} autoComplete="off">
         <Card className="shadow-md">
           <Form.Item
@@ -112,7 +111,25 @@ export default function CreateClassPage() {
             name="formTeacherId"
             rules={[{ required: true, message: "Please select form teacher!" }]}
           >
-            <Select placeholder="Select form teacher" loading={loadingTeachers}>
+            <Select
+              placeholder="Assign a form teacher"
+              loading={loadingTeachers}
+              showSearch
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                (option?.children as unknown as string)
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              notFoundContent={
+                teachers.length === 0 ? (
+                  <div>
+                    <div>No existing teachers.</div>
+                    <Link href="/teachers/create">Add a teacher</Link>
+                  </div>
+                ) : null
+              }
+            >
               {teachers.map((teacher) => (
                 <Option key={teacher.id} value={teacher.id}>
                   {teacher.name}

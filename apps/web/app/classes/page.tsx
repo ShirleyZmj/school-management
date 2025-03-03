@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Table, Button, Card, Typography, Tag, App } from "antd";
+import { Table, Button, App } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import classesService, { Class } from "../services/classes.service";
 import Link from "next/link";
 import TablePageWrapper from "../components/TablePageWrapper";
-
-const { Title } = Typography;
 
 function ClassesPage() {
   const { notification } = App.useApp();

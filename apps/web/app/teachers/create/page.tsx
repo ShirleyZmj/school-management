@@ -47,7 +47,7 @@ export default function CreateTeacherPage() {
   };
 
   return (
-    <PageWrapper title="Add New Teacher">
+    <PageWrapper title="Add Teacher">
       <Form layout="vertical" onFinish={onFinish} autoComplete="off">
         <Card className="shadow-md">
           <Form.Item
