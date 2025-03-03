@@ -25,7 +25,7 @@ export interface PaginatedResponse<T> extends ApiResponse<PaginatedData<T>> {
 // pagination params
 export interface PaginationParams {
   page?: number;
-  pageSize?: number;
+  limit?: number;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
   search?: string;

@@ -12,29 +12,33 @@ export default function TeachersPage() {
   const { notification, message } = App.useApp();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+  const fetchTeachers = useCallback(
+    async (page: number = 1, limit: number = 10) => {
+      setLoading(true);
+      try {
+        const response = await teachersService.getTeachers({ page, limit });
 
-  const fetchTeachers = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await teachersService.getAllTeachers();
-
-      if (response.success && Array.isArray(response.data)) {
-        setTeachers(response.data);
-      } else {
+        if (response.success && Array.isArray(response.data.items)) {
+          setTeachers(response.data.items);
+          setTotal(response.data.total);
+        } else {
+          notification.error({
+            message: "Failed to fetch teachers",
+            description: response.message || "Unknown error occurred",
+          });
+        }
+      } catch (error) {
         notification.error({
-          message: "Failed to fetch teachers",
-          description: response.message || "Unknown error occurred",
+          message: "Error",
+          description: "Failed to fetch teachers",
         });
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      notification.error({
-        message: "Error",
-        description: "Failed to fetch teachers",
-      });
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    },
+    []
+  );
 
   useEffect(() => {
     fetchTeachers();
@@ -127,7 +131,13 @@ export default function TeachersPage() {
           dataSource={teachers}
           rowKey="id"
           loading={loading}
-          pagination={false}
+          pagination={{
+            total: total,
+            pageSize: 10,
+            onChange: (page, pageSize) => {
+              fetchTeachers(page, pageSize);
+            },
+          }}
         />
       </Card>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Form, Input, Button, Card, Typography, App } from "antd";
+import { Form, Input, Button, Card, Typography, App, Select } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,18 @@ import teachersService, {
 } from "../../services/teachers.service";
 
 const { Title } = Typography;
+
+const SUBJECTS = [
+  "English Language",
+  "Mother Tongue Language",
+  "Mathematics",
+  "Science",
+  "Art",
+  "Music",
+  "Physical Education",
+  "Social Studies",
+  "Character and Citizenship",
+];
 
 export default function CreateTeacherPage() {
   const { notification } = App.useApp();
@@ -82,10 +94,16 @@ export default function CreateTeacherPage() {
             label="Subject"
             name="subject"
             rules={[
-              { required: true, message: "Please input teacher's subject!" },
+              { required: true, message: "Please select teacher's subject!" },
             ]}
           >
-            <Input placeholder="Enter teacher's subject" />
+            <Select placeholder="Select teacher's subject">
+              {SUBJECTS.map((subject) => (
+                <Select.Option key={subject} value={subject}>
+                  {subject}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
 
           <Form.Item

@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Form, Input, Button, Card, Typography, Select, message } from "antd";
+import { useState, useEffect, useCallback } from "react";
+import { Form, Input, Button, Card, Typography, Select, App } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import classesService from "../../services/classes.service";
+import teachersService from "../../services/teachers.service";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -20,34 +22,68 @@ interface ClassFormData {
   formTeacherId: number;
 }
 
+const levels = [
+  "Primary 1",
+  "Primary 2",
+  "Primary 3",
+  "Primary 4",
+  "Primary 5",
+  "Primary 6",
+];
+
 export default function CreateClassPage() {
+  const { notification, message } = App.useApp();
+
   const [loading, setLoading] = useState(false);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loadingTeachers, setLoadingTeachers] = useState(true);
   const router = useRouter();
+  const fetchTeachers = useCallback(async () => {
+    setLoadingTeachers(true);
+    try {
+      const response = await teachersService.getAllTeachers();
+
+      if (response.success && Array.isArray(response.data)) {
+        setTeachers(response.data);
+      } else {
+        notification.error({
+          message: "Failed to fetch teachers",
+          description: response.message || "Unknown error occurred",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Failed to fetch teachers",
+        description: "An error occurred while fetching teachers",
+      });
+    } finally {
+      setLoadingTeachers(false);
+    }
+  }, []);
 
   useEffect(() => {
-    // 模拟API调用获取教师列表
-    setTimeout(() => {
-      setTeachers([
-        { id: 1, name: "John Doe" },
-        { id: 2, name: "Jane Smith" },
-        { id: 3, name: "Robert Johnson" },
-      ]);
-      setLoadingTeachers(false);
-    }, 1000);
-  }, []);
+    fetchTeachers();
+  }, [fetchTeachers]);
 
   const onFinish = async (values: ClassFormData) => {
     setLoading(true);
+    try {
+      const response = await classesService.createClass(values);
 
-    // 模拟API调用
-    setTimeout(() => {
-      console.log("Form values:", values);
-      message.success("Class created successfully!");
+      if (response.success) {
+        message.success("Class created successfully");
+        router.push("/classes");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      notification.error({
+        message: "Failed to create class",
+        description: "An error occurred while creating class",
+      });
+    } finally {
       setLoading(false);
-      router.push("/classes");
-    }, 1000);
+    }
   };
 
   return (
@@ -78,12 +114,11 @@ export default function CreateClassPage() {
             rules={[{ required: true, message: "Please select level!" }]}
           >
             <Select placeholder="Select level">
-              <Option value="Primary 1">Primary 1</Option>
-              <Option value="Primary 2">Primary 2</Option>
-              <Option value="Primary 3">Primary 3</Option>
-              <Option value="Primary 4">Primary 4</Option>
-              <Option value="Primary 5">Primary 5</Option>
-              <Option value="Primary 6">Primary 6</Option>
+              {levels.map((level) => (
+                <Option key={level} value={level}>
+                  {level}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
 

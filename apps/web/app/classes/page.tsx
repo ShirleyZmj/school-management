@@ -1,100 +1,66 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Table, Button, Card, Space, Typography, Tag, message } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { Table, Button, Card, Typography, Tag, App } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import classesService, { Class } from "../services/classes.service";
 import Link from "next/link";
 
 const { Title } = Typography;
 
-interface Class {
-  id: number;
-  name: string;
-  level: string;
-  formTeacher: {
-    id: number;
-    name: string;
-  };
-}
-
 export default function ClassesPage() {
+  const { notification, message } = App.useApp();
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // 模拟API调用
-    setTimeout(() => {
-      setClasses([
-        {
-          id: 1,
-          name: "Class 1A",
-          level: "Primary 1",
-          formTeacher: {
-            id: 1,
-            name: "John Doe",
-          },
-        },
-        {
-          id: 2,
-          name: "Class 2B",
-          level: "Primary 2",
-          formTeacher: {
-            id: 2,
-            name: "Jane Smith",
-          },
-        },
-        {
-          id: 3,
-          name: "Class 3C",
-          level: "Primary 3",
-          formTeacher: {
-            id: 3,
-            name: "Robert Johnson",
-          },
-        },
-      ]);
+  const fetchClasses = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await classesService.getClasses();
+      if (response.success && Array.isArray(response.data.items)) {
+        setClasses(response.data.items);
+      } else {
+        notification.error({
+          message: "Failed to fetch classes",
+          description: response.message || "Unknown error occurred",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Failed to fetch classes",
+        description: "An error occurred while fetching classes",
+      });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   }, []);
 
-  const columns = [
-    {
-      title: "Class Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Level",
-      dataIndex: "level",
-      key: "level",
-      render: (level: string) => <Tag color="blue">{level}</Tag>,
-    },
-    {
-      title: "Form Teacher",
-      dataIndex: "formTeacher",
-      key: "formTeacher",
-      render: (teacher: { id: number; name: string }) => teacher.name,
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      render: (_, record: Class) => (
-        <Space size="middle">
-          <Button type="primary" icon={<EditOutlined />} size="small">
-            Edit
-          </Button>
-          <Button
-            danger
-            icon={<DeleteOutlined />}
-            size="small"
-            onClick={() => message.success(`Would delete class ${record.name}`)}
-          >
-            Delete
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+  useEffect(() => {
+    fetchClasses();
+  }, [fetchClasses]);
+
+  const columns = useMemo(
+    () => [
+      {
+        title: "Class Name",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Level",
+        dataIndex: "level",
+        key: "level",
+        render: (level: string) => <Tag color="blue">{level}</Tag>,
+      },
+      {
+        title: "Form Teacher",
+        dataIndex: "formTeacher",
+        key: "formTeacher",
+        render: (formTeacher: { id: number; name: string }) => formTeacher.name,
+      },
+    ],
+    []
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

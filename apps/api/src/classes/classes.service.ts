@@ -34,6 +34,38 @@ export class ClassesService extends RestApiService {
     }));
   }
 
+  async findAllWithPagination(page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
+    return this.handleOperation(async () => {
+      const [data, total] = await Promise.all([this.prisma.classes.findMany({
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          name: true,
+          level: true,
+          formTeacher: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              contactNumber: true,
+            },
+          },
+        },
+      }),
+      this.prisma.classes.count(),
+      ]);
+
+      return {
+        items: data,
+        total,
+        page,
+        limit
+      };
+    });
+  }
+
   async findOne(id: number) {
     return this.handleOperation(() => this.prisma.classes.findUnique({
       where: { id },

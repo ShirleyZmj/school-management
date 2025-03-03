@@ -28,6 +28,30 @@ export class TeachersService extends RestApiService {
     }));
   }
 
+  findAllWithPagination(page: number, limit: number) {
+    const skip = (page - 1) * limit;
+    return this.handleOperation(async () => {
+      const [teachers, total] = await Promise.all([this.prisma.teachers.findMany({
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          subject: true,
+          contactNumber: true,
+        }
+      }), this.prisma.teachers.count()]);
+
+      return {
+        items: teachers,
+        total,
+        page,
+        limit,
+      };
+    });
+  }
+
   findOne(id: number) {
     return this.handleOperation(() => this.prisma.teachers.findUnique({
       where: { id },
