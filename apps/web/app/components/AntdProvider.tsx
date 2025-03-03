@@ -3,12 +3,14 @@
 import "@ant-design/v5-patch-for-react-19";
 
 import { StyleProvider } from "@ant-design/cssinjs";
-import { App, ConfigProvider } from "antd";
+import { App, ConfigProvider, Layout } from "antd";
 import type { FC, PropsWithChildren } from "react";
-import { ReactNode } from "react";
 
 import "../globals.css";
 import "antd/dist/reset.css";
+import Navbar from "./Navbar";
+
+const { Content } = Layout;
 
 const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -20,9 +22,20 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
           token: {
             colorPrimary: "#135BB4",
           },
+          components: {
+            Layout: {
+              headerBg: "#ffffff",
+              bodyBg: "#ffffff",
+            },
+          },
         }}
       >
-        <App>{children}</App>
+        <App>
+          <Layout>
+            <Navbar />
+            <Content className="px-16">{children}</Content>
+          </Layout>
+        </App>
       </ConfigProvider>
     </StyleProvider>
   );

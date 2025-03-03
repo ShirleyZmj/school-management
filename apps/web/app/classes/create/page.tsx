@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import classesService from "../../services/classes.service";
 import teachersService from "../../services/teachers.service";
+import { Level } from "@repo/shared/src/types";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -22,27 +23,20 @@ interface ClassFormData {
   formTeacherId: number;
 }
 
-const levels = [
-  "Primary 1",
-  "Primary 2",
-  "Primary 3",
-  "Primary 4",
-  "Primary 5",
-  "Primary 6",
-];
+const levels = Object.values(Level);
 
 export default function CreateClassPage() {
   const { notification, message } = App.useApp();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loadingTeachers, setLoadingTeachers] = useState(true);
-  const router = useRouter();
+
   const fetchTeachers = useCallback(async () => {
     setLoadingTeachers(true);
     try {
       const response = await teachersService.getAllTeachers();
-
       if (response.success && Array.isArray(response.data)) {
         setTeachers(response.data);
       } else {

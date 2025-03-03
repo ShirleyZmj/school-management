@@ -8,8 +8,8 @@ import Link from "next/link";
 
 const { Title } = Typography;
 
-export default function ClassesPage() {
-  const { notification, message } = App.useApp();
+function ClassesPage() {
+  const { notification } = App.useApp();
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -85,3 +85,5 @@ export default function ClassesPage() {
     </div>
   );
 }
+
+export default ClassesPage;

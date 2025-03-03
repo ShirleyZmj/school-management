@@ -20,6 +20,14 @@ export class RestApiService {
   private handlePrismaError(error: unknown): Error {
     if (error instanceof PrismaClientKnownRequestError) {
       switch (error.code) {
+        case 'P2003': // Foreign key constraint error
+          console.log('Foreign key constraint error', error);
+          return new HttpException({
+            message: 'Foreign key constraint error',
+            errorCode: 'FOREIGN_KEY_CONSTRAINT_ERROR',
+            statusCode: HttpStatus.BAD_REQUEST,
+          }, HttpStatus.BAD_REQUEST);
+
         case 'P2002': { // Unique constraint error
           const target = error.meta?.target as string[];
           const field = target.length ? target.join('_') : 'Unknown';

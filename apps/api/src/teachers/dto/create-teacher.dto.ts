@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { Subject } from "@repo/shared/src/types";
 
 export class CreateTeacherDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -16,5 +17,6 @@ export class CreateTeacherDto {
 
   @IsNotEmpty({ message: 'Subject is required' })
   @IsString()
-  subject: string;
+  @IsEnum(Subject)
+  subject: Subject;
 }

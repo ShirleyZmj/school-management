@@ -8,20 +8,10 @@ import { useRouter } from "next/navigation";
 import teachersService, {
   CreateTeacherRequest,
 } from "../../services/teachers.service";
+import { Subject } from "@repo/shared/src/types";
 
 const { Title } = Typography;
-
-const SUBJECTS = [
-  "English Language",
-  "Mother Tongue Language",
-  "Mathematics",
-  "Science",
-  "Art",
-  "Music",
-  "Physical Education",
-  "Social Studies",
-  "Character and Citizenship",
-];
+const SUBJECTS = Object.values(Subject);
 
 export default function CreateTeacherPage() {
   const { notification } = App.useApp();

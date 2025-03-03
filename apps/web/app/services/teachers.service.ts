@@ -45,7 +45,7 @@ class TeachersService {
 
   // get all teachers
   public async getAllTeachers(): Promise<ApiResponse<Teacher[]>> {
-    return apiService.get<Teacher[]>(this.baseUrl);
+    return apiService.get<Teacher[]>(this.baseUrl, { limit: 0 });
   }
 
   // get a single teacher

@@ -1,2 +1,6 @@
 @tailwind utilities;
 @import "tailwindcss";
+
+.primary-color {
+  color: #135bb4;
+}

@@ -12,6 +12,7 @@ const config = {
         primary: {
           DEFAULT: "#135BB4",
         },
+        fx: "#97A7ED",
       },
     },
   },

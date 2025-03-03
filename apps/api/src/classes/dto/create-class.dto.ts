@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString, IsNumber } from "class-validator";
+import { IsNotEmpty, IsString, IsNumber, IsEnum } from "class-validator";
+import { Level } from "@repo/shared/src/types";
 
 export class CreateClassDto {
   @IsString()
@@ -7,7 +8,8 @@ export class CreateClassDto {
 
   @IsString()
   @IsNotEmpty()
-  level: string;
+  @IsEnum(Level)
+  level: Level;
 
   @IsNumber()
   @IsNotEmpty()
