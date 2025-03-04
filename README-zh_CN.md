@@ -75,7 +75,7 @@ psql postgres
 CREATE DATABASE school_management;
 ```
 
-4. postgreSql 命令
+4. postgreSql 命令（仅作参考，可以跳过）
 4.1. 查看数据库列表
 ```
 \l
@@ -84,6 +84,11 @@ CREATE DATABASE school_management;
 4.2. 选择数据库
 ```
 \c school_management
+```
+
+4.3. 退出 postgreSql 命令行
+```
+\q
 ```
 
 5. 配置 `apps/api` 中的数据库设置
@@ -97,6 +102,7 @@ touch .env
 ```
 
 5.2. 配置数据库设置
+编辑 `.env` 文件
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```

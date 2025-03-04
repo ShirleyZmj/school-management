@@ -81,7 +81,7 @@ psql postgres
 CREATE DATABASE school_management;
 ```
 
-4. PostgreSQL commands
+4. PostgreSQL commands (for reference, you can skip it)
 
 4.1. To check the database list
 ```
@@ -91,6 +91,11 @@ CREATE DATABASE school_management;
 4.2. To choose the database
 ```
 \c school_management
+```
+
+4.3. To quit the PostgreSQL command line
+```
+\q
 ```
 
 5. Configure the database settings in `apps/api`
@@ -104,6 +109,7 @@ touch .env
 ```
 
 5.2. Configure the database settings
+Edit the `.env` file
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database"
 ```
