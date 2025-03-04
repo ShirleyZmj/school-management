@@ -52,73 +52,72 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
   pnpm install
 ```
 
-2. Install postgresql and start the service
+2. Install PostgreSQL (version 14) and start the service
 ```
-brew install postgresql
+brew install postgresql@14
 brew services start postgresql@14
 ```
 
-3. create database
+3. Create the database
 ```
 psql postgres
 CREATE DATABASE school_management;
 ```
 
-4. postgreSql command
+4. PostgreSQL commands
 
-4.1. to check the database list
+4.1. To check the database list
 ```
 \l
 ```
 
-4.2. to choose the database
+4.2. To choose the database
 ```
 \c school_management
 ```
 
-5. config the database settings in apps/api
+5. Configure the database settings in `apps/api`
 ```
 cd apps/api
 ```
 
-5.1. create .env file
+5.1. Create a `.env` file
 ```
 touch .env
 ```
 
-5.2. config the database settings
+5.2. Configure the database settings
 ```
-DATABASE_URL="postgresql://username:password@localhost:5432/database
+DATABASE_URL="postgresql://username:password@localhost:5432/database"
 ```
-- username: your postgresql username.
-- password: your postgresql password.
-- localhost: database host address.
-- 5432: postgresql default port.
-- database: your created database name.
+- `username`: Your PostgreSQL username.
+- `password`: Your PostgreSQL password.
+- `localhost`: Database host address.
+- `5432`: PostgreSQL default port.
+- `database`: Your created database name.
 
-
-for example:
-- my username is zhangmengjia
-- password is null
-- my database name is school_management
+For example:
+- My username is `zhangmengjia`
+- Password is `null`
+- My database name is `school_management`
   
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
 
-5.3. connect the database
+5.3. Connect to the database
 ```
 pnpm run migrate
 ```
 
-6. see the database
+6. View the database
 ```
 pnpm run prisma:studio 
 ```
 It will open a new tab: http://localhost:5555
 
-7. run the project
-go back to the root directory, run all projects
+7. Run the project
+Go back to the root directory, run all projects
 ```
 pnpm run dev
 ```
@@ -132,3 +131,6 @@ Open the browser, visit http://localhost:3000
 2. class management
 2.1. see the list of classes
 2.2. create a new class
+
+## API JSON
+[API JSON FILE](./apps/api/hoppscotch-personal-collections.json)

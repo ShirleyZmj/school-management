@@ -51,9 +51,9 @@
   pnpm install
 ```
 
-2. 安装 postgresql 并启动服务
+2. 安装 postgresql（版本 14）并启动服务
 ```
-brew install postgresql
+brew install postgresql@14
 brew services start postgresql@14
 ```
 
@@ -74,12 +74,12 @@ CREATE DATABASE school_management;
 \c school_management
 ```
 
-5. 配置 apps/api 中的数据库设置
+5. 配置 `apps/api` 中的数据库设置
 ```
 cd apps/api
 ```
 
-5.1. 创建 .env 文件
+5.1. 创建 `.env` 文件
 ```
 touch .env
 ```
@@ -88,16 +88,16 @@ touch .env
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```
-- username: 你的 postgresql 用户名。
-- password: 你的 postgresql 密码。
-- localhost:  数据库主机地址。
-- 5432: postgresql 默认端口。
-- database: 你创建的数据库名称。
+- `username`: 你的 postgresql 用户名。
+- `password`: 你的 postgresql 密码。
+- `localhost`:  数据库主机地址。
+- `5432`: postgresql 默认端口。
+- `database`: 你创建的数据库名称。
 
 例如：
-- 我的用户名是 zhangmengjia
+- 我的用户名是 `zhangmengjia`
 - 密码为空
-- 我的数据库名称是 school_management
+- 我的数据库名称是 `school_management`
 
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
@@ -129,3 +129,6 @@ pnpm run dev
 2. 班级管理
 2.1. 查看班级列表
 2.2. 创建新班级
+
+## API JSON
+[API JSON 文件](./apps/api/hoppscotch-personal-collections.json)

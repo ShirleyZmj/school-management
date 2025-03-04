@@ -1,0 +1,281 @@
+[
+  {
+    "v": 6,
+    "name": "School Management",
+    "folders": [],
+    "requests": [
+      {
+        "v": "11",
+        "name": "add teacher",
+        "method": "POST",
+        "endpoint": "http://localhost:3030/api/teachers",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"name\": \"hello\",\n  \"email\": \"teacher10@qq.com\",\n  \"contactNumber\": \"81189119\",\n  \"subject\": \"Art\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get teacher",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/teachers/23",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "name",
+            "value": "teacher1",
+            "active": true
+          },
+          {
+            "key": "email",
+            "value": "teacher1@qq.com",
+            "active": true
+          }
+        ],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get teacher list",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/teachers",
+        "params": [
+          {
+            "key": "limit",
+            "value": "0",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "name",
+            "value": "teacher1",
+            "active": true
+          },
+          {
+            "key": "email",
+            "value": "teacher1@qq.com",
+            "active": true
+          }
+        ],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get teacher list - Pagination",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/teachers",
+        "params": [
+          {
+            "key": "limit",
+            "value": "10",
+            "active": true,
+            "description": ""
+          },
+          {
+            "key": "page",
+            "value": "1",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "name",
+            "value": "teacher1",
+            "active": true
+          },
+          {
+            "key": "email",
+            "value": "teacher1@qq.com",
+            "active": true
+          }
+        ],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "add class",
+        "method": "POST",
+        "endpoint": "http://localhost:3030/api/classes",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": "application/json",
+          "body": "{\n  \"name\": \"class 2\",\n  \"formTeacherId\": 3,\n  \"level\": \"Primary 3\"\n}"
+        },
+        "requestVariables": [],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get class",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/classes/15",
+        "params": [],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "name",
+            "value": "teacher1",
+            "active": true
+          },
+          {
+            "key": "email",
+            "value": "teacher1@qq.com",
+            "active": true
+          }
+        ],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get class list",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/classes",
+        "params": [
+          {
+            "key": "limit",
+            "value": "0",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "name",
+            "value": "teacher1",
+            "active": true
+          },
+          {
+            "key": "email",
+            "value": "teacher1@qq.com",
+            "active": true
+          }
+        ],
+        "responses": {}
+      },
+      {
+        "v": "11",
+        "name": "get class list - Pagination",
+        "method": "GET",
+        "endpoint": "http://localhost:3030/api/classes",
+        "params": [
+          {
+            "key": "page",
+            "value": "1",
+            "active": true,
+            "description": ""
+          },
+          {
+            "key": "limit",
+            "value": "10",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "headers": [],
+        "preRequestScript": "",
+        "testScript": "",
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [
+          {
+            "key": "page",
+            "value": "1",
+            "active": true
+          },
+          {
+            "key": "limit",
+            "value": "10",
+            "active": true
+          }
+        ],
+        "responses": {}
+      }
+    ],
+    "auth": {
+      "authType": "none",
+      "authActive": true
+    },
+    "headers": [],
+    "_ref_id": "coll_m7oqfotv_f4c71cfe-ae1a-43f4-9eff-9c09ec0c1722"
+  }
+]
