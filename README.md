@@ -63,11 +63,11 @@ CREATE DATABASE school_management;
 ```
 
 4. postgreSql command
-   - to check the database list
+to check the database list
 ```
 \l
 ```
-   - to choose the database
+to choose the database
 ```
 \c school_management
 ```
@@ -86,15 +86,18 @@ touch .env
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```
-username: your postgresql username.
-password: your postgresql password.
-localhost:  database host address.
-5432: postgresql default port.
-database: your created database name.
+- username: your postgresql username.
+- password: your postgresql password.
+- localhost: database host address.
+- 5432: postgresql default port.
+- database: your created database name.
+
 
 for example:
-my username is zhangmengjia, password is null
-my database name is school_management
+- my username is zhangmengjia
+- password is null
+- my database name is school_management
+  
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
@@ -215,15 +218,17 @@ touch .env
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```
-username: 你的 postgresql 用户名。
-password: 你的 postgresql 密码。
-localhost:  数据库主机地址。
-5432: postgresql 默认端口。
-database: 你创建的数据库名称。
+- username: 你的 postgresql 用户名。
+- password: 你的 postgresql 密码。
+- localhost:  数据库主机地址。
+- 5432: postgresql 默认端口。
+- database: 你创建的数据库名称。
 
 例如：
-我的用户名是 zhangmengjia，密码为空
-我的数据库名称是 school_management
+- 我的用户名是 zhangmengjia
+- 密码为空
+- 我的数据库名称是 school_management
+
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
