@@ -4,9 +4,9 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { Table, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import teachersService, { Teacher } from "@/app/services/teachers.service";
-import TablePageWrapper from "@/app/components/TablePageWrapper";
-import { useErrorMessage } from "@/app/hooks/useErrorMessage";
+import teachersService, { Teacher } from "../../src/services/teachers.service";
+import TablePageWrapper from "../../src/components/TablePageWrapper";
+import { useErrorMessage } from "../../src/hooks/useErrorMessage";
 
 export default function TeachersPage() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);

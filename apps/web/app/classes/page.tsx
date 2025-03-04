@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Table, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import classesService, { Class } from "@/app/services/classes.service";
+import classesService, { Class } from "@/src/services/classes.service";
 import Link from "next/link";
-import TablePageWrapper from "@/app/components/TablePageWrapper";
-import { useErrorMessage } from "@/app/hooks/useErrorMessage";
+import TablePageWrapper from "@/src/components/TablePageWrapper";
+import { useErrorMessage } from "@/src/hooks/useErrorMessage";
 
 function ClassesPage() {
   const { showError } = useErrorMessage();

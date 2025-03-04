@@ -6,7 +6,7 @@ import { StyleProvider } from "@ant-design/cssinjs";
 import { App, ConfigProvider, Layout } from "antd";
 import type { FC, PropsWithChildren } from "react";
 
-import "../globals.css";
+import "@/src/styles/globals.css";
 import "antd/dist/reset.css";
 import Navbar from "./Navbar";
 

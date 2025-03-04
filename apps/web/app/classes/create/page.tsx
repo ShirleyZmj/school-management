@@ -5,11 +5,11 @@ import { Form, Input, Button, Card, Select, App } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import classesService from "@/app/services/classes.service";
-import teachersService from "@/app/services/teachers.service";
+import classesService from "@/src/services/classes.service";
+import teachersService from "@/src/services/teachers.service";
 import { Level } from "@repo/shared/src/types";
-import PageWrapper from "@/app/components/PageWrapper";
-import { useErrorMessage } from "@/app/hooks/useErrorMessage";
+import PageWrapper from "@/src/components/PageWrapper";
+import { useErrorMessage } from "@/src/hooks/useErrorMessage";
 
 const { Option } = Select;
 const LEVELS = Object.values(Level);

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import type { ReactNode } from "react";
-import AntdProvider from "./components/AntdProvider";
-import Navbar from "./components/Navbar";
-import "./globals.css";
+import AntdProvider from "@/src/components/AntdProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -4,6 +4,7 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       "@/app": "./app",
+      "@/src": "./src",
     };
     return config;
   },

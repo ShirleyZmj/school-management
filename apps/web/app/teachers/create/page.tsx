@@ -7,10 +7,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import teachersService, {
   CreateTeacherRequest,
-} from "@/app/services/teachers.service";
+} from "../../../src/services/teachers.service";
 import { Subject } from "@repo/shared/src/types";
-import PageWrapper from "@/app/components/PageWrapper";
-import { useErrorMessage } from "@/app/hooks/useErrorMessage";
+import PageWrapper from "../../../src/components/PageWrapper";
+import { useErrorMessage } from "../../../src/hooks/useErrorMessage";
 
 const SUBJECTS = Object.values(Subject);
 
