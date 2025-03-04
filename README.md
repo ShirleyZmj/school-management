@@ -52,13 +52,19 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 - PostgreSQL: 14.11+
 
 ### Run the project steps
-1. Install dependencies [pnpm](https://pnpm.io/installation)
+1. Clone the project to local and enter the project
+```
+git clone git@github.com:ShirleyZmj/school-management.git
+cd school-management
+```
+
+2. Install dependencies [pnpm](https://pnpm.io/installation)
 ```
   npm install pnpm -g
   pnpm install
 ```
 
-2. Install PostgreSQL (version 14) and start the service
+3. Install PostgreSQL (version 14) and start the service
 windows users please refer to: https://www.postgresql.org/download/windows/
 
 macOS users please refer to: https://www.postgresql.org/download/macosx/
@@ -75,35 +81,35 @@ brew install postgresql@14
 brew services start postgresql@14
 ```
 
-3. Create the database
+4. Create the database
 ```
 psql postgres
 CREATE DATABASE school_management;
 ```
 
-4. PostgreSQL commands (for reference, you can skip it)
+5. PostgreSQL commands (for reference, you can skip it)
 
-4.1. To check the database list
+5.1. To check the database list
 ```
 \l
 ```
 
-4.2. To choose the database
+5.2. To choose the database
 ```
 \c school_management
 ```
 
-4.3. To quit the PostgreSQL command line
+5.3. To quit the PostgreSQL command line
 ```
 \q
 ```
 
-5. Configure the database settings in `apps/api`
+6. Configure the database settings in `apps/api`
 ```
 cd apps/api
 ```
 
-5.1. Create a `.env` file
+6.1. Create a `.env` file
 You can manually create the `apps/api/.env` file,
 or run the command:
 macOS can run the command:
@@ -115,7 +121,7 @@ windows can run the command:
 type nul > .env
 ```
 
-5.2. Configure the database settings
+6.2. Configure the database settings
 Edit the `apps/api/.env` file
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database"
@@ -136,18 +142,18 @@ DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
 Copy the `DATABASE_URL` and paste it into the `apps/api/.env` file.
 
-5.3. Connect to the database
+6.3. Connect to the database
 ```
 pnpm run migrate
 ```
 
-6. View the database
+7. View the database
 ```
 pnpm run prisma:studio 
 ```
 It will open a new tab: http://localhost:5555
 
-7. Run the project
+8. Run the project
 Go back to the root directory, run all projects
 ```
 pnpm run dev
@@ -171,3 +177,4 @@ Open the browser, visit http://localhost:3000
 - Add CI/CD
 - Add Docker deployment
 - Add Kubernetes deployment
+- Deploy to cloud server

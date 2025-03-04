@@ -51,13 +51,18 @@
 - PostgreSQL: 14.11+
 
 ### 运行项目步骤
-1. 安装依赖 [pnpm](https://pnpm.io/installation)
+1. 克隆项目到本地并进入项目
+```
+git clone git@github.com:ShirleyZmj/school-management.git
+cd school-management
+```
+2. 安装依赖 [pnpm](https://pnpm.io/installation)
 ```
   npm install pnpm -g
   pnpm install
 ```
 
-2. 安装 postgresql（版本 14）并启动服务
+3. 安装 postgresql（版本 14）并启动服务
 
 windows 用户请参考：https://www.postgresql.org/download/windows/
 
@@ -69,34 +74,34 @@ brew install postgresql@14
 brew services start postgresql@14
 ```
 
-3. 创建数据库
+4. 创建数据库
 ```
 psql postgres
 CREATE DATABASE school_management;
 ```
 
-4. postgreSql 命令（仅作参考，可以跳过）
-4.1. 查看数据库列表
+5. postgreSql 命令（仅作参考，可以跳过）
+5.1. 查看数据库列表
 ```
 \l
 ```
 
-4.2. 选择数据库
+5.2. 选择数据库
 ```
 \c school_management
 ```
 
-4.3. 退出 postgreSql 命令行
+5.3. 退出 postgreSql 命令行
 ```
 \q
 ```
 
-5. 配置 `apps/api` 中的数据库设置
+6. 配置 `apps/api` 中的数据库设置
 ```
 cd apps/api
 ```
 
-5.1. 创建 `.env` 文件
+6.1. 创建 `.env` 文件
 可以手动建立 `apps/api/.env` 文件，
 也可以运行命令：
 macOS 可以运行命令：
@@ -108,7 +113,7 @@ windows 可以运行命令：
 type nul > .env
 ```
 
-5.2. 配置数据库设置
+6.2. 配置数据库设置
 编辑 `apps/api/.env` 文件
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
@@ -129,18 +134,18 @@ DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
 将 `DATABASE_URL` 粘贴到 `apps/api/.env` 文件中。
 
-5.3.测试数据库连接
+6.3. 测试数据库连接
 ```
 pnpm run migrate
 ```
 
-6. 查看数据库
+7. 查看数据库
 ```
 pnpm run prisma:studio 
 ```
 它将打开一个新标签页：http://localhost:5555
 
-7. 运行项目
+8. 运行项目
 返回到根目录，运行所有项目
 ```
 pnpm run dev
@@ -160,7 +165,9 @@ pnpm run dev
 [API JSON 文件](./apps/api/hoppscotch-personal-collections.json)
 
 ## TODO
+- 
 - 添加单元测试
 - 添加 CI/CD
 - 添加 Docker 部署
 - 添加 Kubernetes 部署
+- 部署到云服务器
