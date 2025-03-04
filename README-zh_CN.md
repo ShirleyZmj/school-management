@@ -97,12 +97,19 @@ cd apps/api
 ```
 
 5.1. 创建 `.env` 文件
+可以手动建立 `apps/api/.env` 文件，
+也可以运行命令：
+macOS 可以运行命令：
 ```
 touch .env
 ```
+windows 可以运行命令：
+```
+type nul > .env
+```
 
 5.2. 配置数据库设置
-编辑 `.env` 文件
+编辑 `apps/api/.env` 文件
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```
@@ -120,6 +127,7 @@ DATABASE_URL="postgresql://username:password@localhost:5432/database
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
+将 `DATABASE_URL` 粘贴到 `apps/api/.env` 文件中。
 
 5.3.测试数据库连接
 ```
@@ -150,3 +158,9 @@ pnpm run dev
 
 ## Hoppscotch 的 API JSON文件 （仅供参考）
 [API JSON 文件](./apps/api/hoppscotch-personal-collections.json)
+
+## TODO
+- 添加单元测试
+- 添加 CI/CD
+- 添加 Docker 部署
+- 添加 Kubernetes 部署

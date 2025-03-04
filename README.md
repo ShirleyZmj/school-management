@@ -104,12 +104,19 @@ cd apps/api
 ```
 
 5.1. Create a `.env` file
+You can manually create the `apps/api/.env` file,
+or run the command:
+macOS can run the command:
 ```
 touch .env
 ```
+windows can run the command:
+```
+type nul > .env
+```
 
 5.2. Configure the database settings
-Edit the `.env` file
+Edit the `apps/api/.env` file
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/database"
 ```
@@ -127,6 +134,7 @@ For example:
 ```
 DATABASE_URL="postgresql://zhangmengjia:@localhost:5432/school_management"
 ```
+Copy the `DATABASE_URL` and paste it into the `apps/api/.env` file.
 
 5.3. Connect to the database
 ```
@@ -157,3 +165,9 @@ Open the browser, visit http://localhost:3000
 
 ## API JSON for Hoppscotch (for reference)
 [API JSON FILE](./apps/api/hoppscotch-personal-collections.json)
+
+## TODO
+- Add unit tests
+- Add CI/CD
+- Add Docker deployment
+- Add Kubernetes deployment
