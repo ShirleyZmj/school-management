@@ -165,7 +165,6 @@ pnpm run dev
 [API JSON 文件](./apps/api/hoppscotch-personal-collections.json)
 
 ## TODO
-- 
 - 添加单元测试
 - 添加 CI/CD
 - 添加 Docker 部署
