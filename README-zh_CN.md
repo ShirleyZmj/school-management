@@ -58,6 +58,12 @@
 ```
 
 2. 安装 postgresql（版本 14）并启动服务
+
+windows 用户请参考：https://www.postgresql.org/download/windows/
+
+macOS 用户请参考：https://www.postgresql.org/download/macosx/
+
+macOS 推荐的方法是：
 ```
 brew install postgresql@14
 brew services start postgresql@14
