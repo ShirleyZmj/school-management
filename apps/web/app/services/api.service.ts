@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { ERROR_CODE_MAP } from "../constants/errorMessages";
 
 // response
 export interface ApiResponse<T> {
   data?: T;
-  message: string[];  // Always return string array
+  message?: string | string[];  // Always return string array
   errorCode?: string;
   statusCode?: number;  // Make statusCode required
   success: boolean;
@@ -101,14 +102,11 @@ class ApiService {
       const response: AxiosResponse<ApiResponse<T>> = await this.api(config);
       const { data, statusCode, message, errorCode } = response.data;
 
-      // Format message to array
-      const messageArray = this.formatMessageToArray(message);
-
       // If statusCode is not 200, treat as error
       if (statusCode !== 200) {
         throw {
           statusCode,
-          message: messageArray,
+          message,
           errorCode,
           success: false
         };
@@ -118,14 +116,18 @@ class ApiService {
       return {
         success: true,
         data,
-        message: messageArray,
+        message: "success",
       };
     } catch (error: any) {
+      let mappedMessage = error.message;
+      if (error.errorCode && Object.prototype.hasOwnProperty.call(ERROR_CODE_MAP, error.errorCode)) {
+        mappedMessage = ERROR_CODE_MAP[error.errorCode as keyof typeof ERROR_CODE_MAP];
+      }
       // Handle error response
       const errorResponse: ApiResponse<T> = {
         success: false,
         statusCode: error.statusCode || 500,
-        message: this.formatMessageToArray(error.message),
+        message: this.formatMessageToArray(mappedMessage),
         errorCode: error.errorCode || 'UNKNOWN_ERROR'
       };
 
@@ -139,7 +141,7 @@ class ApiService {
   }
 
   // Helper function to format message to array
-  private formatMessageToArray(message?: string | string[]): string[] {
+  private formatMessageToArray(message: string | string[] | undefined): string[] {
     if (!message) {
       return ['Unknown error'];
     }

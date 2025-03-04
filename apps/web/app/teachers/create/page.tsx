@@ -23,7 +23,6 @@ export default function CreateTeacherPage() {
     setLoading(true);
     try {
       const response = await teachersService.createTeacher(values);
-      console.log(response);
       if (response.success) {
         message.success("Teacher created successfully!");
         router.push("/teachers");
