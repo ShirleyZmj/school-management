@@ -17,7 +17,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter());
 
   // Set global prefix for all routes
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix('api');
 
   // Configure CORS
   app.enableCors({
