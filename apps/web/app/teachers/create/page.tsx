@@ -1,46 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { Form, Input, Button, Card, Typography, App, Select } from "antd";
+import { Form, Input, Button, Card, App, Select } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import teachersService, {
   CreateTeacherRequest,
-} from "../../services/teachers.service";
+} from "@/app/services/teachers.service";
 import { Subject } from "@repo/shared/src/types";
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "@/app/components/PageWrapper";
+import { useErrorMessage } from "@/app/hooks/useErrorMessage";
 
-const { Title } = Typography;
 const SUBJECTS = Object.values(Subject);
 
 export default function CreateTeacherPage() {
-  const { notification } = App.useApp();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
+  const { message } = App.useApp();
+  const { showError } = useErrorMessage();
   const onFinish = async (values: CreateTeacherRequest) => {
     setLoading(true);
     try {
       const response = await teachersService.createTeacher(values);
       console.log(response);
       if (response.success) {
-        notification.success({
-          message: "Success",
-          description: "Teacher created successfully!",
-        });
+        message.success("Teacher created successfully!");
         router.push("/teachers");
       } else {
-        notification.error({
-          message: "Failed to create teacher",
-          description: response.message || "Unknown error occurred",
-        });
+        showError("Failed to create teacher", response.message);
       }
     } catch (error) {
-      notification.error({
-        message: "Error",
-        description: "Failed to create teacher",
-      });
+      showError("Failed to create teacher", "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -99,7 +90,7 @@ export default function CreateTeacherPage() {
                 message: "Please input teacher's workcontact number.",
               },
               {
-                pattern: /^[689]\d{7}$/,
+                pattern: /^(?:\+65)?[689]\d{7}$/,
                 message: "This work contact number is invalid.",
               },
             ]}

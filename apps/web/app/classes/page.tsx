@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Table, Button, App } from "antd";
+import { Table, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import classesService, { Class } from "../services/classes.service";
+import classesService, { Class } from "@/app/services/classes.service";
 import Link from "next/link";
-import TablePageWrapper from "../components/TablePageWrapper";
+import TablePageWrapper from "@/app/components/TablePageWrapper";
+import { useErrorMessage } from "@/app/hooks/useErrorMessage";
 
 function ClassesPage() {
-  const { notification } = App.useApp();
+  const { showError } = useErrorMessage();
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,16 +20,13 @@ function ClassesPage() {
       if (response.success && Array.isArray(response.data.items)) {
         setClasses(response.data.items);
       } else {
-        notification.error({
-          message: "Failed to fetch classes",
-          description: response.message || "Unknown error occurred",
-        });
+        showError("Failed to fetch classes", response.message);
       }
     } catch (error) {
-      notification.error({
-        message: "Failed to fetch classes",
-        description: "An error occurred while fetching classes",
-      });
+      showError(
+        "Failed to fetch classes",
+        "An error occurred while fetching classes"
+      );
     } finally {
       setLoading(false);
     }

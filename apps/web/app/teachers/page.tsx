@@ -1,19 +1,19 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Table, Button, Card, Space, Typography, App } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Table, Button } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import teachersService, { Teacher } from "../services/teachers.service";
-import TablePageWrapper from "../components/TablePageWrapper";
-
-const { Title } = Typography;
+import teachersService, { Teacher } from "@/app/services/teachers.service";
+import TablePageWrapper from "@/app/components/TablePageWrapper";
+import { useErrorMessage } from "@/app/hooks/useErrorMessage";
 
 export default function TeachersPage() {
-  const { notification } = App.useApp();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
+  const { showError } = useErrorMessage();
+
   const fetchTeachers = useCallback(
     async (page: number = 1, limit: number = 10) => {
       setLoading(true);
@@ -24,16 +24,10 @@ export default function TeachersPage() {
           setTeachers(response.data.items);
           setTotal(response.data.total);
         } else {
-          notification.error({
-            message: "Failed to fetch teachers",
-            description: response.message || "Unknown error occurred",
-          });
+          showError("Failed to fetch teachers", response.message);
         }
       } catch (error) {
-        notification.error({
-          message: "Error",
-          description: "Failed to fetch teachers",
-        });
+        showError("Failed to fetch teachers", "An unexpected error occurred");
       } finally {
         setLoading(false);
       }

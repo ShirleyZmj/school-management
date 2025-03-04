@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@/app": "./app",
+    };
+    return config;
+  },
   async rewrites() {
     return [
       {

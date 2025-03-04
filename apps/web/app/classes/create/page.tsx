@@ -5,12 +5,14 @@ import { Form, Input, Button, Card, Select, App } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import classesService from "../../services/classes.service";
-import teachersService from "../../services/teachers.service";
+import classesService from "@/app/services/classes.service";
+import teachersService from "@/app/services/teachers.service";
 import { Level } from "@repo/shared/src/types";
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "@/app/components/PageWrapper";
+import { useErrorMessage } from "@/app/hooks/useErrorMessage";
 
 const { Option } = Select;
+const LEVELS = Object.values(Level);
 
 interface Teacher {
   id: number;
@@ -23,10 +25,9 @@ interface ClassFormData {
   formTeacherId: number;
 }
 
-const levels = Object.values(Level);
-
 export default function CreateClassPage() {
-  const { notification, message } = App.useApp();
+  const { message } = App.useApp();
+  const { showError } = useErrorMessage();
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -37,19 +38,13 @@ export default function CreateClassPage() {
     setLoadingTeachers(true);
     try {
       const response = await teachersService.getAllTeachers();
-      if (response.success && Array.isArray(response.data)) {
-        setTeachers(response.data);
+      if (response.success) {
+        setTeachers(response.data || []);
       } else {
-        notification.error({
-          message: "Failed to fetch teachers",
-          description: response.message || "Unknown error occurred",
-        });
+        showError("Failed to fetch teachers", response.message);
       }
     } catch (error) {
-      notification.error({
-        message: "Failed to fetch teachers",
-        description: "An error occurred while fetching teachers",
-      });
+      showError("Failed to fetch teachers", "An unexpected error occurred");
     } finally {
       setLoadingTeachers(false);
     }
@@ -63,18 +58,17 @@ export default function CreateClassPage() {
     setLoading(true);
     try {
       const response = await classesService.createClass(values);
-
       if (response.success) {
         message.success("Class created successfully");
         router.push("/classes");
       } else {
-        throw new Error(response.message);
+        showError("Failed to create class", response.message);
       }
     } catch (error) {
-      notification.error({
-        message: "Failed to create class",
-        description: "An error occurred while creating class",
-      });
+      showError(
+        "Failed to create class",
+        "An error occurred while creating class"
+      );
     } finally {
       setLoading(false);
     }
@@ -90,7 +84,7 @@ export default function CreateClassPage() {
             rules={[{ required: true, message: "Please select level!" }]}
           >
             <Select placeholder="Select level">
-              {levels.map((level) => (
+              {LEVELS.map((level) => (
                 <Option key={level} value={level}>
                   {level}
                 </Option>

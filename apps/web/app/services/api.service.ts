@@ -3,10 +3,10 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } f
 // response
 export interface ApiResponse<T> {
   data?: T;
-  message?: string;
+  message: string[];  // Always return string array
   errorCode?: string;
-  statusCode?: number;
-  success?: boolean;
+  statusCode?: number;  // Make statusCode required
+  success: boolean;
 }
 
 interface PaginatedData<T> {
@@ -67,44 +67,20 @@ class ApiService {
     // response interceptor
     this.api.interceptors.response.use(
       (response) => {
-        const { statusCode, message, errorCode } = response.data;
-        if (statusCode !== 200) {
-          return Promise.reject({
-            success: false,
-            statusCode,
-            message,
-            errorCode,
-          });
-        } else {
-          return response;
-        }
+        // Return response directly, let request method handle the logic
+        return response;
       },
-      (error: AxiosError) => {
-        // handle error response
-        if (error.response) {
-          // server returned an error status code
-          const { status } = error.response;
-
-          if (status === 401) {
-            // unauthorized, you can handle the logout logic here
-            // localStorage.removeItem('token');
-            // window.location.href = '/login';
-          }
-
-          return Promise.reject({
-            success: false,
-            errorCode: 'UNKNOWN_SERVER_ERROR',
-            message: 'Unknown server error',
-            statusCode: status,
-          });
+      (error: AxiosError<ApiResponse<any>>) => {
+        // If server returned a response, use it
+        if (error.response?.data) {
+          return Promise.reject(error.response.data);
         }
 
-        // network error or request cancelled
+        // Handle network or other errors
         return Promise.reject({
-          success: false,
+          statusCode: 500,
           errorCode: 'NETWORK_ERROR',
-          message: error.message || 'Network error',
-          statusCode: error.code || 500,
+          message: error.message || 'Network connection error'
         });
       }
     );
@@ -122,26 +98,55 @@ class ApiService {
   // common request method
   private async request<T>(config: IRequestConfig): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse = await this.api(config);
-      console.log('common request response', response);
+      const response: AxiosResponse<ApiResponse<T>> = await this.api(config);
+      const { data, statusCode, message, errorCode } = response.data;
+
+      // Format message to array
+      const messageArray = this.formatMessageToArray(message);
+
+      // If statusCode is not 200, treat as error
+      if (statusCode !== 200) {
+        throw {
+          statusCode,
+          message: messageArray,
+          errorCode,
+          success: false
+        };
+      }
+
+      // Return success response
       return {
         success: true,
-        statusCode: response.status,
-        data: response.data.data,
-        message: response.data?.message || '',
+        data,
+        message: messageArray,
       };
     } catch (error: any) {
-      let errorResponse: ApiResponse<T> = {
+      // Handle error response
+      const errorResponse: ApiResponse<T> = {
         success: false,
-        message: error.message || 'Unknown error',
-        errorCode: error.errorCode || 'UNKNOWN_ERROR',
         statusCode: error.statusCode || 500,
+        message: this.formatMessageToArray(error.message),
+        errorCode: error.errorCode || 'UNKNOWN_ERROR'
       };
-      if (config.silent !== true) {
-        console.error(errorResponse);
+
+      // Log error if not silent
+      if (!config.silent) {
+        console.error('API Error:', errorResponse);
       }
+
       return errorResponse;
     }
+  }
+
+  // Helper function to format message to array
+  private formatMessageToArray(message?: string | string[]): string[] {
+    if (!message) {
+      return ['Unknown error'];
+    }
+    if (Array.isArray(message)) {
+      return message;
+    }
+    return [message];
   }
 
   // GET Request
