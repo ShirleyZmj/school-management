@@ -48,7 +48,7 @@
 ### 环境版本要求
 - Node.js: 20.15.0+
 - pnpm: 9.14.2+
-- PostgreSQL: 14.11
+- PostgreSQL: 14.11+
 
 ### 运行项目步骤
 1. 安装依赖 [pnpm](https://pnpm.io/installation)

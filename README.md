@@ -49,7 +49,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 ### Environment version requirements
 - Node.js: 20.15.0+
 - pnpm: 9.14.2+
-- PostgreSQL: 14.11
+- PostgreSQL: 14.11+
 
 ### Run the project steps
 1. Install dependencies [pnpm](https://pnpm.io/installation)
