@@ -11,13 +11,13 @@ export class TeachersService extends RestApiService {
   }
 
   async create(createTeacherDto: CreateTeacherDto) {
-    return this.handleOperation(() => this.prisma.teachers.create({
+    return this.handleOperation('POST', () => this.prisma.teachers.create({
       data: createTeacherDto
     }));
   }
 
   findAll() {
-    return this.handleOperation(() => this.prisma.teachers.findMany({
+    return this.handleOperation('GET', () => this.prisma.teachers.findMany({
       select: {
         id: true,
         name: true,
@@ -30,7 +30,7 @@ export class TeachersService extends RestApiService {
 
   findAllWithPagination(page: number, limit: number) {
     const skip = (page - 1) * limit;
-    return this.handleOperation(async () => {
+    return this.handleOperation('GET', async () => {
       const [teachers, total] = await Promise.all([this.prisma.teachers.findMany({
         skip,
         take: limit,
@@ -53,7 +53,7 @@ export class TeachersService extends RestApiService {
   }
 
   findOne(id: number) {
-    return this.handleOperation(() => this.prisma.teachers.findUnique({
+    return this.handleOperation('GET', () => this.prisma.teachers.findUnique({
       where: { id },
       select: {
         id: true,

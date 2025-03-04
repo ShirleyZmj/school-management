@@ -6,7 +6,7 @@ export interface ApiResponse<T> {
   data?: T;
   message?: string | string[];  // Always return string array
   errorCode?: string;
-  statusCode?: number;  // Make statusCode required
+  statusCode: number;  // Make statusCode required
   success: boolean;
 }
 
@@ -102,21 +102,21 @@ class ApiService {
       const response: AxiosResponse<ApiResponse<T>> = await this.api(config);
       const { data, statusCode, message, errorCode } = response.data;
 
-      // If statusCode is not 200, treat as error
-      if (statusCode !== 200) {
-        throw {
+      // If statusCode is between 200 and 299, treat as success
+      if (statusCode >= 200 && statusCode < 300) {
+        return {
+          success: true,
           statusCode,
+          data,
           message,
-          errorCode,
-          success: false
         };
       }
 
-      // Return success response
-      return {
-        success: true,
-        data,
-        message: "success",
+      throw {
+        statusCode,
+        message,
+        errorCode,
+        success: false
       };
     } catch (error: any) {
       let mappedMessage = error.message;

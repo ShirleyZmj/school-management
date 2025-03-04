@@ -1,20 +1,29 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
+const statusCodes = {
+  GET: 200,
+  POST: 201,
+  PUT: 200,
+  DELETE: 204,
+};
+
+type OperationType = keyof typeof statusCodes;
+
 @Injectable()
 export class RestApiService {
-  protected async handleOperation<T>(operation: () => Promise<T>): Promise<{ statusCode: number; message: string; data?: T }> {
+  protected async handleOperation<T>(operationType: OperationType, operation: () => Promise<T>): Promise<{ statusCode: number; message: string; data?: T }> {
     try {
       const result = await operation();
-      return this.successResponse(result) as any;
+      return this.successResponse(result, operationType) as any;
     } catch (error) {
       console.log('Prisma error', error);
       throw this.handlePrismaError(error);
     }
   }
 
-  protected successResponse<T>(data: T) {
-    return { statusCode: 200, message: "success", data };
+  protected successResponse<T>(data: T, operationType: OperationType) {
+    return { statusCode: statusCodes[operationType] || 200, message: "success", data };
   }
 
   private handlePrismaError(error: unknown): Error {
