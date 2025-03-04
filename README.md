@@ -63,11 +63,13 @@ CREATE DATABASE school_management;
 ```
 
 4. postgreSql command
-to check the database list
+
+4.1. to check the database list
 ```
 \l
 ```
-to choose the database
+
+4.2. to choose the database
 ```
 \c school_management
 ```
@@ -195,11 +197,12 @@ CREATE DATABASE school_management;
 ```
 
 4. postgreSql 命令
-   - 查看数据库列表
+4.1. 查看数据库列表
 ```
 \l
 ```
-   - 选择数据库
+
+4.2. 选择数据库
 ```
 \c school_management
 ```
