@@ -98,7 +98,7 @@ DATABASE_URL="postgresql://username:password@localhost:5432/database"
 
 For example:
 - My username is `zhangmengjia`
-- Password is `null`
+- Password is null
 - My database name is `school_management`
   
 ```
@@ -132,5 +132,5 @@ Open the browser, visit http://localhost:3000
 2.1. see the list of classes
 2.2. create a new class
 
-## API JSON
+## API JSON for Hoppscotch (for reference)
 [API JSON FILE](./apps/api/hoppscotch-personal-collections.json)

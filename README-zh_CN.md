@@ -130,5 +130,5 @@ pnpm run dev
 2.1. 查看班级列表
 2.2. 创建新班级
 
-## API JSON
+## Hoppscotch 的 API JSON文件 （仅供参考）
 [API JSON 文件](./apps/api/hoppscotch-personal-collections.json)
