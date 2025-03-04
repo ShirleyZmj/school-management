@@ -44,7 +44,13 @@
     - 一个用于 monorepo 的共享库，包含通用的工具、服务和类型。
     - 目前，它包含 API 和 web 应用的通用类型。
 
-### 如何运行项目
+## 如何运行项目
+### 环境版本要求
+- Node.js: 20.15.0+
+- pnpm: 9.14.2+
+- PostgreSQL: 14.11
+
+### 运行项目步骤
 1. 安装依赖 [pnpm](https://pnpm.io/installation)
 ```
   npm install pnpm -g

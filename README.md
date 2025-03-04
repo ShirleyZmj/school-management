@@ -45,7 +45,13 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
     - Currently, it contains common types for both the API and the web app.
 
 
-### How to run the project
+## How to run the project
+### Environment version requirements
+- Node.js: 20.15.0+
+- pnpm: 9.14.2+
+- PostgreSQL: 14.11
+
+### Run the project steps
 1. Install dependencies [pnpm](https://pnpm.io/installation)
 ```
   npm install pnpm -g
