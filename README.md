@@ -70,13 +70,8 @@ windows users please refer to: https://www.postgresql.org/download/windows/
 
 macOS users please refer to: https://www.postgresql.org/download/macosx/
 
-Recommend method for macOS:
-```
-brew install postgresql@14
-brew services start postgresql@14
-```
 
-Recommend method:
+Recommend method for macOS:
 ```
 brew install postgresql@14
 brew services start postgresql@14
