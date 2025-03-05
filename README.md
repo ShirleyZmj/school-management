@@ -65,6 +65,7 @@ cd school-management
 ```
 
 3. Install PostgreSQL (version 14) and start the service
+
 windows users please refer to: https://www.postgresql.org/download/windows/
 
 macOS users please refer to: https://www.postgresql.org/download/macosx/
