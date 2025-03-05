@@ -157,13 +157,13 @@ pnpm run dev
 Open the browser, visit http://localhost:3000
 
 ## How to use the project
-1. teacher management
-1.1. see the list of teachers
-1.2. create a new teacher
+1. teacher management  
+1.1. see the list of teachers  
+1.2. create a new teacher  
 
-2. class management
-2.1. see the list of classes
-2.2. create a new class
+1. class management  
+2.1. see the list of classes  
+2.2. create a new class  
 
 ## API JSON for Hoppscotch (for reference)
 [API JSON FILE](./apps/api/hoppscotch-personal-collections.json)

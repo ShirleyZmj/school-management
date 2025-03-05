@@ -153,13 +153,13 @@ pnpm run dev
 打开浏览器，访问 http://localhost:3000
 
 ## 如何使用项目
-1. 教师管理
-1.1. 查看教师列表
-1.2. 创建新教师
+1. 教师管理  
+1.1. 查看教师列表  
+1.2. 创建新教师  
 
-2. 班级管理
-2.1. 查看班级列表
-2.2. 创建新班级
+2. 班级管理   
+2.1. 查看班级列表   
+2.2. 创建新班级   
 
 ## Hoppscotch 的 API JSON文件 （仅供参考）
 [API JSON 文件](./apps/api/hoppscotch-personal-collections.json)
