@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { Table, Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { useState, useEffect, useMemo, useCallback, ChangeEventHandler, ChangeEvent } from "react";
+import { Table, Button, Input } from "antd";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import teachersService, { Teacher } from "../../src/services/teachers.service";
 import TablePageWrapper from "../../src/components/TablePageWrapper";
@@ -12,6 +12,7 @@ export default function TeachersPage() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
+  const [keyword, setKeyword] = useState('');
   const { showError } = useErrorMessage();
 
   const fetchTeachers = useCallback(
@@ -34,6 +35,15 @@ export default function TeachersPage() {
     },
     []
   );
+
+  const handleSearch = () => {
+
+  };
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.currentTarget.value);
+  }, []);
+
 
   useEffect(() => {
     fetchTeachers();
@@ -84,6 +94,7 @@ export default function TeachersPage() {
         </Link>
       }
     >
+      <Input value={keyword} onChange={handleChange} onPressEnter={handleSearch} className="mb-4" size="large" placeholder="Search by name, email or contact number" prefix={<SearchOutlined />} />
       <Table
         columns={columns}
         dataSource={teachers}

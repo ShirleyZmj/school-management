@@ -53,6 +53,9 @@ class TeachersService {
     return apiService.get<Teacher>(`${this.baseUrl}/${id}`);
   }
 
+  public async getTeachersByKeyword(keyword: string): Promise<ApiResponse<Teacher[]>> {
+    return apiService.get<Teacher[]>(this.baseUrl, { limit: 0 });
+  }
   // create a teacher
   public async createTeacher(data: CreateTeacherRequest): Promise<ApiResponse<Teacher>> {
     return apiService.post<Teacher>(this.baseUrl, data);

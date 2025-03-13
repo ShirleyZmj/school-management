@@ -65,6 +65,31 @@ export class TeachersService extends RestApiService {
     }));
   }
 
+  // name, email, contactNumber
+  findListByKeyword(keyword: string) {
+    return this.handleOperation('GET', () => this.prisma.teachers.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: keyword,
+            },
+          },
+          {
+            email: {
+              contains: keyword,
+            }
+          },
+          {
+            contactNumber: {
+              contains: keyword
+            }
+          }
+        ],
+      },
+    }))
+  }
+
   update(id: number, updateTeacherDto: UpdateTeacherDto) {
     console.log(updateTeacherDto);
     return `This action updates a #${id} teacher`;

@@ -21,6 +21,15 @@ export class TeachersController {
     return this.teachersService.findAllWithPagination(page, limit);
   }
 
+  @Get()
+  findByKeyword(@Query('keyword') keyword) {
+    if (!keyword || !keyword.trim()) { // check if empty
+      this.teachersService.findAll();
+    }
+    return this.teachersService.findListByKeyword(keyword);
+  }
+
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.teachersService.findOne(+id);
