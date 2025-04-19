@@ -17,6 +17,7 @@ const LEVELS = Object.values(Level);
 interface Teacher {
   id: number;
   name: string;
+  email: string;
 }
 
 interface ClassFormData {
@@ -126,7 +127,7 @@ export default function CreateClassPage() {
             >
               {teachers.map((teacher) => (
                 <Option key={teacher.id} value={teacher.id}>
-                  {teacher.name}
+                  {teacher.email}
                 </Option>
               ))}
             </Select>
