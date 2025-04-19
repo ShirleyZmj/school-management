@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import teachersService, {
   CreateTeacherRequest,
 } from "../../../src/services/teachers.service";
-import { Subject } from "@repo/shared/src/types";
+import { Subject } from "../../../src/types";
 import PageWrapper from "../../../src/components/PageWrapper";
 import { useErrorMessage } from "../../../src/hooks/useErrorMessage";
 

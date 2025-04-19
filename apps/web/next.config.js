@@ -16,6 +16,10 @@ const nextConfig = {
       },
     ];
   },
+  transpilePackages: ["@repo/shared"],
+  experimental: {
+    externalDir: true,
+  },
 };
 
 export default nextConfig;

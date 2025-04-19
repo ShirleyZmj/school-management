@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import classesService from "@/src/services/classes.service";
 import teachersService from "@/src/services/teachers.service";
-import { Level } from "@repo/shared/src/types";
+import { Level } from "../../../src/types";
 import PageWrapper from "@/src/components/PageWrapper";
 import { useErrorMessage } from "@/src/hooks/useErrorMessage";
 

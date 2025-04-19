@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TeachersService } from './teachers.service';
-import { Subject } from '@repo/shared/src/types';
+import { Subject } from '@repo/shared';
 
 describe('TeachersService', () => {
   let service: TeachersService;

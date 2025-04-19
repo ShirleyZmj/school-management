@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
-import { Subject } from "@repo/shared/src/types";
+import { Subject } from "@repo/shared";
 
 export class CreateTeacherDto {
   @IsNotEmpty({ message: 'Name is required' })
