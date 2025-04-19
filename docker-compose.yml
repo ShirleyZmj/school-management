@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # 数据库服务（如果需要在同一环境中部署数据库）
+  # 注意：在生产环境中，建议使用云提供商的托管数据库服务
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: school_management_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # API 服务
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      # 注意：在使用此文件时，应当创建.env文件设置这些值
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@db:5432/school_management_db}
+      NODE_ENV: production
+      PORT: 3000
+    networks:
+      - app-network
+
+  # 前端服务（如果需要）
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/web/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge 
