@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:render": "cd ../../ && pnpm build --filter=@repo/shared && cd apps/api && nest build",
     "migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
