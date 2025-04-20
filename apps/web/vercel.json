@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@repo/shared --force && cd apps/web && pnpm build",
-  "installCommand": "cd ../.. && npm i -g pnpm@9.0.0 && pnpm install",
+  "buildCommand": "cd ../.. && chmod +x vercel-build.sh && ./vercel-build.sh",
+  "installCommand": "cd ../.. && pnpm install",
+  "outputDirectory": "apps/web/.next",
   "framework": "nextjs"
 }
