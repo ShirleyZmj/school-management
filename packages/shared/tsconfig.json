@@ -4,8 +4,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
-    "preserveConstEnums": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"]
+    "preserveConstEnums": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
