@@ -1,7 +1,8 @@
 #!/bin/bash
 
 pnpm install
-pnpm build  # 让 turbo 根据 pipeline 构建所有包
+pnpm build --filter="@repo/shared"
+pnpm build --filter="web"
 
 # # 输出调试信息
 # echo "Current working directory: $(pwd)"
