@@ -5,16 +5,6 @@ echo "Current working directory: $(pwd)"
 echo "Listing workspace packages:"
 ls -la packages/
 
-# 确保pnpm安装完成
-echo "Installing dependencies..."
-pnpm install
-
-# 验证tsconfig.json
-echo "Checking tsconfig.json configuration..."
-cat packages/shared/tsconfig.json
-echo "Checking base tsconfig.json..."
-cat packages/typescript-config/base.json
-
 # 只构建前端需要的包
 echo "Building shared package..."
 pnpm build --filter="@repo/shared"
@@ -33,4 +23,4 @@ pnpm install
 
 # 构建web应用
 echo "Building web app..."
-npx next build 
+pnpm build
