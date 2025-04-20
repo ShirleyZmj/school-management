@@ -17,6 +17,12 @@ pnpm build --filter="@repo/shared"
 echo "Shared package build result:"
 ls -la packages/shared/dist/
 
+# 验证tsconfig.json
+echo "Checking tsconfig.json configuration..."
+cat packages/shared/tsconfig.json
+echo "Checking base tsconfig.json..."
+cat packages/typescript-config/base.json
+
 # 返回到web应用并构建
 echo "Building web application..."
 cd apps/web
