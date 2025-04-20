@@ -9,6 +9,12 @@ ls -la packages/
 echo "Installing dependencies..."
 pnpm install
 
+# 验证tsconfig.json
+echo "Checking tsconfig.json configuration..."
+cat packages/shared/tsconfig.json
+echo "Checking base tsconfig.json..."
+cat packages/typescript-config/base.json
+
 # 只构建前端需要的包
 echo "Building shared package..."
 pnpm build --filter="@repo/shared"
@@ -16,12 +22,6 @@ pnpm build --filter="@repo/shared"
 # 输出shared包构建结果
 echo "Shared package build result:"
 ls -la packages/shared/dist/
-
-# 验证tsconfig.json
-echo "Checking tsconfig.json configuration..."
-cat packages/shared/tsconfig.json
-echo "Checking base tsconfig.json..."
-cat packages/typescript-config/base.json
 
 # 返回到web应用并构建
 echo "Building web application..."
