@@ -9,28 +9,22 @@ ls -la packages/
 echo "Installing dependencies..."
 pnpm install
 
-# 构建所有包
-echo "Building all packages..."
-pnpm build
+# 只构建前端需要的包
+echo "Building shared package..."
+pnpm build --filter="@repo/shared"
 
-# # 构建shared包
-# echo "Building shared package..."
-# cd packages/shared
-# pnpm build
-# cd ../..
+# 输出shared包构建结果
+echo "Shared package build result:"
+ls -la packages/shared/dist/
 
-# # 输出shared包构建结果
-# echo "Shared package build result:"
-# ls -la packages/shared/dist/
+# 返回到web应用并构建
+echo "Building web application..."
+cd apps/web
 
-# # 为API应用生成Prisma客户端
-# echo "Generating Prisma client for API..."
-# cd apps/api
-# npx prisma generate
-# cd ../..
+# 确保web应用目录下的next依赖已安装
+echo "Installing web app dependencies..."
+pnpm install
 
-# # 返回到web应用并构建
-# echo "Building web application..."
-# cd apps/web
-# pnpm install
-# pnpm build 
+# 构建web应用
+echo "Building web app..."
+npx next build 
