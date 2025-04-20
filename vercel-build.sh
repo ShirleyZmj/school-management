@@ -12,15 +12,21 @@ pnpm install
 # 构建shared包
 echo "Building shared package..."
 cd packages/shared
-pnpm build --no-cache
+pnpm build
 cd ../..
 
 # 输出shared包构建结果
 echo "Shared package build result:"
 ls -la packages/shared/dist/
 
+# 为API应用生成Prisma客户端
+echo "Generating Prisma client for API..."
+cd apps/api
+npx prisma generate
+cd ../..
+
 # 返回到web应用并构建
 echo "Building web application..."
 cd apps/web
 pnpm install
-pnpm build --no-cache 
+pnpm build 
