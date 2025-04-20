@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "build:render": "cd ../../ && pnpm build --filter=@repo/shared && cd apps/api && npx prisma generate && tsc -p tsconfig.build.json",
+    "build:render": "cd ../../ && pnpm build --filter=@repo/shared && cd apps/api && npx prisma generate && nest build",
     "build:render2": "cd ../../ && pnpm build --filter=@repo/shared && cd apps/api && npx prisma generate && nest build",
     "migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/cli": "^11.0.0",
     "@nestjs/core": "^11.0.1",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
@@ -39,7 +40,6 @@
     "@repo/shared": "workspace:*",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
-    "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.1",
     "@repo/eslint-config": "workspace:*",
