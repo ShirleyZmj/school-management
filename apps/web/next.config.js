@@ -10,6 +10,7 @@ const nextConfig = {
     // 在生产环境构建时禁用ESLint检查
     ignoreDuringBuilds: true,
   },
+  output: "standalone",
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
