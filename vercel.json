@@ -12,6 +12,6 @@
       "dest": "apps/web/$1"
     }
   ],
-  "buildCommand": "pnpm build",
+  "buildCommand": "cd ../.. && pnpm build --filter=@repo/shared && cd apps/web && pnpm build",
   "installCommand": "pnpm install"
 }
