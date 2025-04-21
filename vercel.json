@@ -13,7 +13,5 @@
     }
   ],
   "buildCommand": "pnpm build",
-  "installCommand": "pnpm install",
-  "root": "apps/web",
-  "outputDirectory": ".next"
+  "installCommand": "pnpm install"
 }
