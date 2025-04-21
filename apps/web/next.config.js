@@ -19,7 +19,17 @@ const nextConfig = {
     return config;
   },
   async rewrites() {
+    // 在生产环境中，可能不需要重写API请求，因为前端和后端可能部署在不同的域
+    // 检查是否处于Vercel环境中
+    if (process.env.VERCEL) {
+      // 在Vercel环境中，可以选择不重写请求
+      console.log("Running on Vercel, not applying API rewrites");
+      return [];
+    }
+
+    // 本地开发环境的重写配置
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3030";
+    console.log(`Applying API rewrites to ${API_URL}`);
     return [
       {
         source: "/api/:path*",
