@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd ../.. && chmod +x vercel-build.sh && ./vercel-build.sh",
+  "buildCommand": "cd ../.. && pnpm build --filter=@repo/shared && cd apps/web && pnpm build",
   "installCommand": "cd ../.. && pnpm install",
-  "outputDirectory": "apps/web/.next",
+  "outputDirectory": ".next",
   "framework": "nextjs"
 }
