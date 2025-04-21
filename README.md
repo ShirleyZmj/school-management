@@ -174,3 +174,4 @@ Open the browser, visit http://localhost:3000
 - Add Docker deployment
 - Add Kubernetes deployment
 - Deploy to cloud server
+- trying
