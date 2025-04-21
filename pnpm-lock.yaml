@@ -153,21 +153,33 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@tailwindcss/postcss':
+        specifier: ^4.1.4
+        version: 4.1.4
       antd:
         specifier: ^5.24.2
         version: 5.24.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.5.3)
       axios:
         specifier: ^1.8.1
         version: 1.8.1
       next:
         specifier: ^15.1.6
         version: 15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      postcss:
+        specifier: ^8.5.3
+        version: 8.5.3
       react:
         specifier: ^19.0.0
         version: 19.0.0
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      tailwindcss:
+        specifier: ^4.0.9
+        version: 4.0.9
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -175,9 +187,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      '@tailwindcss/postcss':
-        specifier: ^4.1.4
-        version: 4.1.4
       '@types/node':
         specifier: ^22
         version: 22.13.5
@@ -187,18 +196,9 @@ importers:
       '@types/react-dom':
         specifier: 19.0.3
         version: 19.0.3(@types/react@19.0.8)
-      autoprefixer:
-        specifier: ^10.4.20
-        version: 10.4.20(postcss@8.5.3)
       eslint:
         specifier: ^9.21.0
         version: 9.21.0(jiti@2.4.2)
-      postcss:
-        specifier: ^8.5.3
-        version: 8.5.3
-      tailwindcss:
-        specifier: ^4.0.9
-        version: 4.0.9
       typescript:
         specifier: 5.7.3
         version: 5.7.3

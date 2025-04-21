@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_ENV=development pnpm install --frozen-lockfile
+pnpm install --frozen-lockfile
 pnpm build --filter="@repo/shared"
 pnpm build --filter="web"
 
