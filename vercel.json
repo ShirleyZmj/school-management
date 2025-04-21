@@ -1,17 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "apps/web/next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "apps/web/$1"
-    }
-  ],
-  "buildCommand": "cd ../.. && pnpm build --filter=@repo/shared && cd apps/web && pnpm build",
+  "buildCommand": "cd ../.. && pnpm build --filter=@repo/shared... --filter=web",
   "installCommand": "pnpm install"
 }
